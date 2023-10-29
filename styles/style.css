@@ -1,1 +1,11 @@
+body {
+    padding-top: 80px;
+    padding-bottom: 80px;;
+}
 
+/* For line chart */
+.chart-container {
+    width: 90%;
+    height: 100%;
+    margin: auto;
+  }
