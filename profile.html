@@ -22,6 +22,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/styleMain.css">
 
 </head>
 
@@ -37,9 +38,9 @@
     <div class="container d-flex justify-content-center">
         <div class="card p-3 py-4">
             <div class="d-flex gap-2 mb-3 justify-content-end">
-                <button type="button" class="btn btn-primary">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                        class="bi bi-share-fill" viewBox="0 0 16 16">
+                <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+                    <svg width="16" height="16" fill="currentColor" class="bi bi-share-fill" viewBox="0 0 16 16">
                         <path
                             d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z">
                         </path>
@@ -47,40 +48,52 @@
                 </button>
             </div>
             <div class="text-center">
-                <img src="./images/elmo.jpg" width="100" class="rounded-circle">
-                <h3 class="mt-2">Elmo Dog</h3>
-                <span class="mt-1 clearfix">Influencer</span>
+                <img id="userIcon" src="./images/elmo.jpg" width="100" class="rounded-circle">
+                <h3 class="mt-2" id="userName">Elmo Dog</h3>
+                <span id="userTitle" class="mt-1 clearfix">Influencer</span>
 
                 <div class="row mt-3 mb-3">
 
                     <div class="col-4">
                         <h5>Daily</h5>
-                        <span class="num">10</span>
+                        <span id="daily" class="num">10</span>
                     </div>
                     <div class="col-4">
                         <h5>Monthly</h5>
-                        <span class="num">10</span>
+                        <span id="monthly" class="num">10</span>
                     </div>
                     <div class="col-4">
-                        <h5>Yearly</h5>
-                        <span class="num">10</span>
+                        <h5>Streak</h5>
+                        <span id="streak" class="num">10</span>
                     </div>
 
                 </div>
 
                 <hr class="line">
 
-                <small class="mt-4">I am a cute dog bark bark bark bark bark bark bark bark bark</small>
-                
-                <div class="card-body">
-                    <canvas id="douChart"></canvas>
-                </div>
+                <small id="userDescription" class="mt-4">I am a cute dog bark bark bark bark bark bark bark bark
+                    bark</small>
 
+                <div class="score mx-auto mt-3" id="userScore">45</div>
+
+                <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom"
+                    aria-labelledby="offcanvasBottomLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasBottomLabel">Share</h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body d-flex align-content-center flex-column">
+                        <button type="button" class="btn btn-primary mb-2">Twitter</button>
+                        <button type="button" class="btn btn-primary mb-2">Facebook</button>
+                        <button type="button" class="btn btn-primary mb-2">Instagram</button>
+                        <button type="button" class="btn btn-primary mb-2">Tiktok</button>
+                    </div>
+                </div>
+                <!-- 
                 <div class="profile mt-5">
-
                     <button class="btn btn-primary">View More Details</button>
-
-                </div>
+                </div> -->
 
             </div>
         </div>
@@ -95,9 +108,6 @@
     <!---------------------------------------------->
 
     <!-- Link to scripts of your own -->
-    <script src="./scripts/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="./scripts/chartScript.js"></script>
     <script src="./scripts/skeleton.js"></script>
     <!-- Link to Firebase API-->
     <script src="./scripts/firebaseAPI_BBY13.js"></script>
