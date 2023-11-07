@@ -192,3 +192,9 @@ form .address {
     margin-bottom: 2rem;
 }
 
+.text-cut {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
