@@ -19,6 +19,11 @@ var uiConfig = {
             db.collection("users").doc(user.uid).set({         //write to firestore. We are using the UID for the ID in users collection
                    name: user.displayName,                    //"users" collection
                    email: user.email,                         //with authenticated user's ID (user.uid)
+                   address1: "",
+                   address2: "",
+                   city: "",
+                   province: "",
+                   postalCode: "",
                    country: "",                      //optional default profile info      
                    school: "",
                    ecoScore: 0,
