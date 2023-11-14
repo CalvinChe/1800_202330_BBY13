@@ -26,6 +26,7 @@ var uiConfig = {
                    postalCode: "",
                    country: "",                      //optional default profile info      
                    school: "",
+                   profilePic: "",
                    ecoScore: 0,
                    points: 0,
                    level: 1,

@@ -17,6 +17,7 @@ function populateUserInfo() {
                     var userDescription = userDoc.data().description;
                     var userTitle = userDoc.data().title;
                     var userPostalCode = userDoc.data().postalCode;
+                    var userProfilePic = userDoc.data().profilePic;
 
                     //if the data fields are not empty, then write them in to the form.
                     if (userName != null) {
@@ -39,6 +40,10 @@ function populateUserInfo() {
                     }
                     if (userPostalCode != null) {
                         document.getElementById("postalCodeInput").value = userPostalCode;
+                    }
+                    if (userProfilePic != null) {
+                        const image = document.getElementById("mypic-goes-here");
+                        image.src = userProfilePic;
                     }
                 })
         } else {
@@ -72,10 +77,70 @@ function saveUserInfo() {
     })
     .then(() => {
         console.log("Document successfully updated!");
+        uploadPic(document.getElementById('nameInput').value);
+        // window.location.href = "profile.html"; // Redirect to the profile page. (causes image to not be uploaded properly)
     })
 
     document.getElementById('personalInfoFields').disabled = true;
 }
+
+var ImageFile;
+function listenFileSelect() {
+      // listen for file selection
+      var fileInput = document.getElementById("mypic-input"); // pointer #1
+      const image = document.getElementById("mypic-goes-here"); // pointer #2
+
+			// When a change happens to the File Chooser Input
+      fileInput.addEventListener('change', function (e) {
+          ImageFile = e.target.files[0];   //Global variable
+          var blob = URL.createObjectURL(ImageFile);
+          image.src = blob; // Display this image
+      })
+}
+listenFileSelect();
+
+//------------------------------------------------
+// So, a new post document has just been added
+// and it contains a bunch of fields.
+// We want to store the image associated with this post,
+// such that the image name is the postid (guaranteed unique).
+// 
+// This function is called AFTER the post has been created, 
+// and we know the post's document id.
+//------------------------------------------------
+function uploadPic(postDocID) {
+    console.log("inside uploadPic " + postDocID);
+    var storageRef = storage.ref("images/" + postDocID + ".jpg");
+
+    storageRef.put(ImageFile)   //global variable ImageFile
+       
+                   // AFTER .put() is done
+        .then(function () {
+            console.log('2. Uploaded to Cloud Storage.');
+            storageRef.getDownloadURL()
+
+                 // AFTER .getDownloadURL is done
+                .then(function (url) { // Get URL of the uploaded file
+                    console.log("3. Got the download URL.");
+
+                    // Now that the image is on Storage, we can go back to the
+                    // post document, and update it with an "image" field
+                    // that contains the url of where the picture is stored.
+                    currentUser.update({
+                            profilePic: url // Save the URL into users collection
+                        })
+                         // AFTER .update is done
+                        .then(function () {
+                            console.log('4. Added pic URL to Firestore.');
+                        })
+                })
+        })
+        .catch((error) => {
+             console.log("error uploading to cloud storage");
+        })
+}
+
+
 
 //call the function to run it 
 populateUserInfo();
