@@ -117,6 +117,7 @@ function writeEvents() {
         total_spots: 20,
         attendees: 11,
         remains: 9,
+        
         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
     });
 
@@ -225,3 +226,4 @@ displayHistoryLoop();
 displayDailyQuest();
 displayScore();
 displayCardsDynamically("events");  //input param is the name of the collection
+// eventSignupURLgenerator("events");

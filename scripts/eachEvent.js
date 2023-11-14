@@ -3,6 +3,9 @@ function displayEventInfo() {
     let ID = params.searchParams.get( "docID" ); //get value for key "id"
     console.log( ID );
 
+    // assign docID for eventSignup.html
+    document.querySelector('.eventSignup').href = "eventSignup.html?docID="+ID;
+
     // doublecheck: is your collection called "Reviews" or "reviews"?
     db.collection( "events" )
         .doc( ID )
