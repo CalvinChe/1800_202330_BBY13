@@ -21,7 +21,7 @@ function displayCardsDynamically(collection) {
 
     db.collection(collection).get()   //the collection
         .then(allActivity=> {
-            var i = 1;  //Optional: if you want to have a unique ID for each hike
+            // var i = 1;  //Optional: if you want to have a unique ID for each hike
             allActivity.forEach(doc => { //iterate thru each doc
                 var title = doc.data().name;       // get value of the "name" key
                 var description = doc.data().description;  // get value of the "details" key
@@ -40,14 +40,14 @@ function displayCardsDynamically(collection) {
                 // newcard.querySelector('a').href = ".html?docID="+docID;
 
                 //Optional: give unique ids to all elements for future use
-                newcard.querySelector('.card-title').setAttribute("id", "ctitle" + i);
+                newcard.querySelector('.card-title').setAttribute("id", "" + title);
                 // newcard.querySelector('.card-text').setAttribute("id", "ctext" + i);
                 // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
 
                 //attach to gallery, Example: "hikes-go-here"
                 document.getElementById(collection + "-go-here").appendChild(newcard);
 
-                i++;   //Optional: iterate variable to serve as unique ID
+                // i++;   //Optional: iterate variable to serve as unique ID
             })
         })
 }
@@ -65,7 +65,7 @@ function completeActivity(button) {
             currentUser = db.collection("users").doc(user.uid)
             //get the document for current user.
             currentUser.get().then(userDoc => {
-                var userLevel = userDoc.date().level;
+                var userLevel = userDoc.data().level;
                 userPoints = userDoc.data().points;
                 newPoints = userPoints + 5;
                 currentUser.update({
@@ -78,7 +78,7 @@ function completeActivity(button) {
 }
 
 function calculateUserLevel(exp, currentLevel) {
-     var expRequire = 100 * (currentLevel ** 1.1)
+     var expRequire = 100 * (1.1 ** currentLevel)
      if (exp >= expRequire) {
         userLevel++;
      }
