@@ -20,16 +20,16 @@ function displayCardsDynamically(collection) {
     let cardTemplate = document.getElementById("activityCardTemplate"); // Retrieve the HTML element with the ID "hikeCardTemplate" and store it in the cardTemplate variable. 
 
     db.collection(collection).get()   //the collection
-        .then(allActivity=> {
+        .then(allActivity => {
             // var i = 1;  //Optional: if you want to have a unique ID for each hike
             allActivity.forEach(doc => { //iterate thru each doc
                 var title = doc.data().name;       // get value of the "name" key
                 var description = doc.data().description;  // get value of the "details" key
-				var daily = doc.data().daily;    //get value of daily key
+                var daily = doc.data().daily;    //get value of daily key
                 var score = doc.data().score; //gets the score field
                 var evalue = doc.data().evalue; //gets evalue
                 let newcard = cardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
-                
+
                 var docID = doc.id;// grab id for specific activity
 
                 //update title and text and image
@@ -57,15 +57,16 @@ displayCardsDynamically("activity");  //input param is the name of the collectio
 function completeActivity(button) {
     var userPoints;
     var newPoints;
+    var userScore;
+    var newScore;
     var activityPts;
-    button.className="btn btn-primary card-href disabled"
+    button.className = "btn btn-primary card-href disabled" //change button class to include disabled
     var activityID = button.id
     console.log(activityID);
-    db.collection('activity').doc(activityID).get().then((thisActivity => {
+    db.collection('activity').doc(activityID).get().then((thisActivity => { // get the point value for the activity
         activityPts = thisActivity.data().score;
-        console.log(activityPts);
+        // console.log(activityPts);
     }))
-    console.log(activityPts);
     firebase.auth().onAuthStateChanged(user => {
         // Check if user is signed in:
         if (user) {
@@ -74,24 +75,35 @@ function completeActivity(button) {
             activityPoints = db.collection
             //get the document for current user.
             currentUser.get().then(userDoc => {
-                // var userLevel = userDoc.data().level;
+                var userLevel = userDoc.data().level;
                 userPoints = userDoc.data().points;
-                newPoints = userPoints + activityPts;
+                userScore = userDoc.data().ecoScore
+                newPoints = userPoints + activityPts; //add new points to existing
+                newScore = userScore + activityPts;
+
                 currentUser.update({
                     points: newPoints,
-                    today: firebase.firestore.FieldValue.arrayUnion(activityID)
+                    ecoScore: newScore,
+                    today: firebase.firestore.FieldValue.arrayUnion(activityID),
+                    level: calculateUserLevel(newScore, userLevel)
                 })
             })
         }
-    })   
+    })
     console.log(currentUser);
 }
 
-function calculateUserLevel(exp, currentLevel) {
-     var expRequire = 100 * (1.1 ** currentLevel)
-     if (exp >= expRequire) {
+function calculateUserLevel(exp, userLevel) {
+    var levelXP;
+    var expRequire = 0;
+    for (let i = 1; i <= userLevel; i++) {
+        levelXP = 10 * (1.1 ** (i - 1))
+        expRequire += levelXP;
+    }
+    if (exp >= expRequire) {
         userLevel++;
-     }
+    }
+    return userLevel;
 }
 
 
