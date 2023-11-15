@@ -40,7 +40,7 @@ function displayCardsDynamically(collection) {
                 // newcard.querySelector('a').href = ".html?docID="+docID;
 
                 //Optional: give unique ids to all elements for future use
-                newcard.querySelector('.card-title').setAttribute("id", "" + title);
+                newcard.querySelector('a').setAttribute("id", "" + title.toLowerCase());
                 // newcard.querySelector('.card-text').setAttribute("id", "ctext" + i);
                 // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
 
@@ -57,17 +57,26 @@ displayCardsDynamically("activity");  //input param is the name of the collectio
 function completeActivity(button) {
     var userPoints;
     var newPoints;
+    var activityPts;
     button.className="btn btn-primary card-href disabled"
+    var activityID = button.id
+    console.log(activityID);
+    db.collection('activity').doc(activityID).get().then((thisActivity => {
+        activityPts = thisActivity.data().score;
+        console.log(activityPts);
+    }))
+    console.log(activityPts);
     firebase.auth().onAuthStateChanged(user => {
         // Check if user is signed in:
         if (user) {
             //go to the correct user document by referencing to the user uid
             currentUser = db.collection("users").doc(user.uid)
+            activityPoints = db.collection
             //get the document for current user.
             currentUser.get().then(userDoc => {
-                var userLevel = userDoc.data().level;
+                // var userLevel = userDoc.data().level;
                 userPoints = userDoc.data().points;
-                newPoints = userPoints + 5;
+                newPoints = userPoints + activityPts;
                 currentUser.update({
                     points: newPoints
                 })
