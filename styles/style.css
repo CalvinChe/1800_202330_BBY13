@@ -198,3 +198,16 @@ form .address {
     display: -webkit-box;
     -webkit-box-orient: vertical;
 }
+
+.card {
+    width: 90%;
+}
+
+.btn {
+    background-color: #a3d366;
+    color: black;
+}
+
+h1 {
+    text-align: center;
+}

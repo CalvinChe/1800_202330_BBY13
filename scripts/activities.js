@@ -36,7 +36,7 @@ function displayCardsDynamically(collection) {
                 newcard.querySelector('.card-title').innerHTML = title;
                 newcard.querySelector('.card-points').innerHTML = score + " points.";
                 newcard.querySelector('.card-text').innerHTML = description;
-                // newcard.querySelector('.card-image').src = `./images/${hikeCode}.jpg`; //Example: NV01.jpg
+                newcard.querySelector('.card-image').src = `./images/${doc.id}.png`; //Example: NV01.jpg
                 // newcard.querySelector('a').href = ".html?docID="+docID;
 
                 //Optional: give unique ids to all elements for future use
@@ -78,7 +78,8 @@ function completeActivity(button) {
                 userPoints = userDoc.data().points;
                 newPoints = userPoints + activityPts;
                 currentUser.update({
-                    points: newPoints
+                    points: newPoints,
+                    today: firebase.firestore.FieldValue.arrayUnion(activityID)
                 })
             })
         }
