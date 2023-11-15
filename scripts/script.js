@@ -15,7 +15,7 @@ function logout() {
 //sayHello();
 
 var currentUser;               //points to the document of the user who is logged in
-function displayUserProfilePicture() {
+function displayUserProfilePictureAndLevel() {
   firebase.auth().onAuthStateChanged(user => {
     // Check if user is signed in:
     if (user) {
@@ -26,10 +26,15 @@ function displayUserProfilePicture() {
         .then(userDoc => {
           //get the data fields of the user
           var userProfilePic = userDoc.data().profilePic;
+          var userLevel = userDoc.data().level;
 
           if (userProfilePic != null) {
             const image = document.getElementById("profilePic");
             image.src = userProfilePic;
+          }
+
+          if (userLevel != null) {
+            document.getElementById("lvl").innerHTML = "Lvl " + userLevel;
           }
         })
     } else {
@@ -39,4 +44,5 @@ function displayUserProfilePicture() {
   });
 }
 
-displayUserProfilePicture();
+displayUserProfilePictureAndLevel();
+

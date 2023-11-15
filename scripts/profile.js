@@ -11,10 +11,11 @@ function populateUserInfo() {
                     //get the data fields of the user
                     var userName = userDoc.data().name;
                     var ecoScore = userDoc.data().ecoScore;
-                    var level = userDoc.data().level;
+                    var userLevel = userDoc.data().level;
                     var userDescription = userDoc.data().description;
                     var userTitle = userDoc.data().title;
                     var userProfilePic = userDoc.data().profilePic;
+                    var userPoints = userDoc.data().points;
 
                     //if the data fields are not empty, then write them in to the form.
                     if (userName != null) {
@@ -24,8 +25,12 @@ function populateUserInfo() {
                         document.getElementById("ecoScore").innerText = ecoScore;
                     }
                     if (level != null) {
-                        document.getElementById("level").innerText = level;
+                        document.getElementById("level").innerText = userLevel;
                     }
+                    if (points != null) {
+                        document.getElementById("points").innerText = userPoints;
+                    }
+
                     if (userDescription != null) {
                         document.getElementById("userDescription").innerText = userDescription;
                     }
