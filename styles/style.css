@@ -199,8 +199,14 @@ form .address {
     -webkit-box-orient: vertical;
 }
 
+#activity-go-here {
+    display: flex;
+    justify-content: center;
+}
+
 .card {
     width: 90%;
+    margin: 10px;
 }
 
 .btn {
