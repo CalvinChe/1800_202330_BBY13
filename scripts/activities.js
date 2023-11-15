@@ -7,12 +7,10 @@ firebase.auth().onAuthStateChanged(user => {
         currentUser = db.collection("users").doc(user.uid)
         //get the document for current user.
         currentUser.get()
-        console.log(user.uid);
     } else {
         console.log("error");
     }
 })
-console.log(currentUser);
 //------------------------------------------------------------------------------
 // Input parameter is a string representing the collection we are reading from
 //------------------------------------------------------------------------------
@@ -76,32 +74,31 @@ function completeActivity(button) {
             //get the document for current user.
             currentUser.get().then(userDoc => {
                 var userLevel = userDoc.data().level;
-                userPoints = userDoc.data().points;
-                userScore = userDoc.data().ecoScore
+                userPoints = userDoc.data().points; //grab current points
+                userScore = userDoc.data().ecoScore // grab current ecoScore
                 newPoints = userPoints + activityPts; //add new points to existing
                 newScore = userScore + activityPts;
 
                 currentUser.update({
                     points: newPoints,
                     ecoScore: newScore,
-                    today: firebase.firestore.FieldValue.arrayUnion(activityID),
-                    level: calculateUserLevel(newScore, userLevel)
+                    today: firebase.firestore.FieldValue.arrayUnion(activityID), // add completed activity to today array
+                    level: calculateUserLevel(newScore, userLevel) // call function to calculate user level
                 })
             })
         }
     })
-    console.log(currentUser);
 }
 
-function calculateUserLevel(exp, userLevel) {
-    var levelXP;
+function calculateUserLevel(exp, userLevel) { // calculates user level
+    var levelXP; 
     var expRequire = 0;
-    for (let i = 1; i <= userLevel; i++) {
-        levelXP = 10 * (1.1 ** (i - 1))
+    for (let i = 1; i <= userLevel; i++) { // loop to get total xp needed currently
+        levelXP = 10 * (1.1 ** (i - 1)) // calculation for dynamic level scaling
         expRequire += levelXP;
     }
     if (exp >= expRequire) {
-        userLevel++;
+        userLevel++; // increase user level
     }
     return userLevel;
 }
