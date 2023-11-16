@@ -90,8 +90,12 @@ function increaseLevel(userEcoScore, activityPts, userLevel, currentUser) {
     if (calculateUserLevel((userEcoScore + activityPts), userLevel) > userLevel) {
         currentUser.update({
             level: firebase.firestore.FieldValue.increment(1)
-        }).then(window.location.href = "levelCongrats.html")
+        }).then(setTimeout(redirectCongrats, 200))
     }
+}
+
+function redirectCongrats() {
+    window.location.href = "levelCongrats.html";
 }
 
 function calculateUserLevel(exp, userLevel) { // calculates user level
