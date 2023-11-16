@@ -54,10 +54,9 @@ displayCardsDynamically("activity");  //input param is the name of the collectio
 
 function completeActivity(button) {
     var userPoints;
-    var newPoints;
-    var userScore;
-    var newScore;
+    var userEcoScore;
     var activityPts;
+    var userLevel;
     button.className = "btn btn-primary card-href disabled" //change button class to include disabled
     var activityID = button.id
     console.log(activityID);
@@ -70,35 +69,40 @@ function completeActivity(button) {
         if (user) {
             //go to the correct user document by referencing to the user uid
             currentUser = db.collection("users").doc(user.uid)
-            activityPoints = db.collection
             //get the document for current user.
             currentUser.get().then(userDoc => {
-                var userLevel = userDoc.data().level;
-                userPoints = userDoc.data().points; //grab current points
-                userScore = userDoc.data().ecoScore // grab current ecoScore
-                newPoints = userPoints + activityPts; //add new points to existing
-                newScore = userScore + activityPts;
+                userLevel = userDoc.data().level;
+                userPoints = userDoc.data().points; // grab current points
+                userEcoScore = userDoc.data().ecoScore // grab current ecoScore
 
                 currentUser.update({
-                    points: newPoints,
-                    ecoScore: newScore,
+                    points: firebase.firestore.FieldValue.increment(activityPts),
+                    ecoScore: firebase.firestore.FieldValue.increment(activityPts),
                     today: firebase.firestore.FieldValue.arrayUnion(activityID), // add completed activity to today array
-                    level: calculateUserLevel(newScore, userLevel) // call function to calculate user level
-                })
+                }).then(increaseLevel(userEcoScore, activityPts, userLevel, currentUser))
             })
         }
     })
 }
 
+
+function increaseLevel(userEcoScore, activityPts, userLevel, currentUser) {
+    if (calculateUserLevel((userEcoScore + activityPts), userLevel) > userLevel) {
+        currentUser.update({
+            level: firebase.firestore.FieldValue.increment(1)
+        }).then(window.location.href = "levelCongrats.html")
+    }
+}
+
 function calculateUserLevel(exp, userLevel) { // calculates user level
-    var levelXP; 
+    var levelXP;
     var expRequire = 0;
     for (let i = 1; i <= userLevel; i++) { // loop to get total xp needed currently
         levelXP = 10 * (1.1 ** (i - 1)) // calculation for dynamic level scaling
         expRequire += levelXP;
     }
     if (exp >= expRequire) {
-        userLevel++; // increase user level
+        userLevel++ // increase user level
     }
     return userLevel;
 }
