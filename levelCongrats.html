@@ -24,7 +24,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script> 
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
 
     <!-- Other libraries go here -->
@@ -34,13 +34,13 @@
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css">
     <!-- Link to Firebase API-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script> 
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script> 
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script> 
-    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script> 
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script> 
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" /> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
     <script src="./scripts/firebaseAPI_BBY13.js"></script>
 
 </head>
@@ -54,14 +54,24 @@
     <Header id="headerPlaceholder"></Header>
 
     <!-- Stuff for body goes here -->
-    <div class="jumbotron">
-        <h1 class="display-4">Level Up!</h1>
-        <p class="lead">You've done enough eco activities to reach the next rank!</p>
-        <hr class="my-4">
-        <p>Thanks for your contribution, keep it up!</p>
-        <p class="lead">
-          <a class="btn btn-primary btn-lg" href="activities.html" role="button">Return</a>
-        </p>
+    <!-- <div class="jumbotron">
+        <div>
+            <h1 class="display-4">Level Up!</h1>
+            <p class="lead">You've done enough eco activities to reach the next rank!</p>
+            <hr class="my-4">
+            <p>Thanks for your contribution, keep it up!</p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="activities.html" role="button">Return</a>
+            </p>
+        </div>
+    </div> -->
+    <div class="card congrats">
+        <img class="card-img-top planet" src="./images/happy planet.png" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">You've done enough eco activities to reach the next rank!</h5>
+          <p class="card-text">Thanks for your contribution, keep it up!</p>
+          <a href="activities.html" class="btn btn-primary">Confirm</a>
+        </div>
       </div>
 
     <!-- Navbar -->

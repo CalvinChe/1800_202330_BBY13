@@ -221,3 +221,16 @@ form .address {
 h1 {
     text-align: center;
 }
+
+.congrats {
+    width:80%;
+    margin: 10%;
+    text-align: center;
+    justify-items:  center;
+}
+
+.planet {
+    width: 20%;
+    align-self: center;
+    margin: 2%;
+}

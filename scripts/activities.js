@@ -76,21 +76,21 @@ function completeActivity(button) {
                 userEcoScore = userDoc.data().ecoScore // grab current ecoScore
 
                 currentUser.update({
-                    points: firebase.firestore.FieldValue.increment(activityPts),
-                    ecoScore: firebase.firestore.FieldValue.increment(activityPts),
+                    points: firebase.firestore.FieldValue.increment(activityPts), // increment user points by activity value
+                    ecoScore: firebase.firestore.FieldValue.increment(activityPts), // increment user ecoScore
                     today: firebase.firestore.FieldValue.arrayUnion(activityID), // add completed activity to today array
-                }).then(increaseLevel(userEcoScore, activityPts, userLevel, currentUser))
+                }).then(increaseLevel(userEcoScore, activityPts, userLevel, currentUser)) // call increase level function
             })
         }
     })
 }
 
 
-function increaseLevel(userEcoScore, activityPts, userLevel, currentUser) {
+function increaseLevel(userEcoScore, activityPts, userLevel, currentUser) { // calculates if user has levelled up
     if (calculateUserLevel((userEcoScore + activityPts), userLevel) > userLevel) {
-        currentUser.update({
+        currentUser.update({ // upsdates user level if necessary
             level: firebase.firestore.FieldValue.increment(1)
-        }).then(setTimeout(redirectCongrats, 200))
+        }).then(setTimeout(redirectCongrats, 200)) // redirect to congrats page upon level up
     }
 }
 
