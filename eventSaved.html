@@ -54,6 +54,35 @@
     <Header id="headerPlaceholder"></Header>
 
     <!-- Stuff for body goes here -->
+    <!-- Container -->
+    <div class="container">
+        <h1>Saved Events for <span id=name-goes-here></span></h1>
+        <!-- Here is container for cards  -->
+        <div class="container">
+            <div id="eventCardGroup" class="row row-cols-auto">
+            </div>
+        </div>
+    </div>
+
+    <!-- Templates for general use, not displayed -->
+    <template id="savedCardTemplate">
+        <div class="card p-2 mx-auto my-3" style="width: 45%">
+            <img class="card-image card-img-top" src=" ..." alt="..." style="height: 12rem; object-fit:cover" />
+            <div class="card-body">
+                <div class="card-time mb-2">Card time</div>
+                <h5 class="card-title text-cut" style="-webkit-line-clamp: 2;">Card title</h5>
+                <p class="card-text text-cut" style="-webkit-line-clamp: 5;">
+                    Some quick example text to build on the card title and make up the
+                    bulk of the card's content.
+                </p>
+                <p class="card-attend">Card attend</p>
+                <div class="d-flex justify-content-between">
+                    <a class="btn btn-success card-href">Read more ...</a>
+                    <i class="bi bi-bookmarks bookmark" style="font-size: 1.6rem"></i>
+                </div>
+            </div>
+        </div>
+    </template>
 
     <!-- Navbar -->
     <nav id="navbarPlaceholder"></nav>
@@ -65,6 +94,8 @@
     <!-- Link to scripts of your own -->
     <script src="./scripts/script.js"></script>
     <script src="./scripts/skeleton.js"></script>
+    <script src="./scripts/eventSaved.js"></script>
+    <script src="./scripts/eventUpcoming.js"></script>
 </body>
 
 </html>

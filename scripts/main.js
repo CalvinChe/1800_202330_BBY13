@@ -179,51 +179,9 @@ function writeEvents() {
     });
 }
 
-//------------------------------------------------------------------------------
-// Input parameter is a string representing the collection we are reading from
-//------------------------------------------------------------------------------
-function displayCardsDynamically(collection) {
-    let cardTemplate = document.getElementById("eventCardTemplate"); // Retrieve the HTML element with the ID "hikeCardTemplate" and store it in the cardTemplate variable. 
-
-    db.collection(collection).get()   //the collection called "hikes"
-        .then(allEvents=> {
-            //var i = 1;  //Optional: if you want to have a unique ID for each hike
-            allEvents.forEach(doc => { //iterate thru each doc
-				var code = doc.data().code;    //get unique ID to each hike to be used for fetching right image
-                var name = doc.data().name;       // get value of the "name" key
-                var time = doc.data().day + " · " + doc.data().time + " " + doc.data().timezone;
-                var rate = doc.data().rate;
-                var attend = doc.data().attendees + " attendees · " + doc.data().remains + " spots remain";
-                var details = doc.data().details;  // get value of the "details" key
-                var docID = doc.id;
-                let newcard = cardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
-
-                //update title and text and image
-                newcard.querySelector('.card-time').innerHTML = time;
-                newcard.querySelector('.card-title').innerHTML = name;
-                newcard.querySelector('.card-text').innerHTML = details;
-                newcard.querySelector('.card-attend').innerHTML = attend;
-                newcard.querySelector('.card-image').src = `./images/${code}.jpg`; //Example: NV01.jpg
-                newcard.querySelector('a').href = "eachEvent.html?docID="+docID;
-
-                //Optional: give unique ids to all elements for future use
-                // newcard.querySelector('.card-title').setAttribute("id", "ctitle" + i);
-                // newcard.querySelector('.card-text').setAttribute("id", "ctext" + i);
-                // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
-
-                //attach to gallery, Example: "hikes-go-here"
-                document.getElementById(collection + "-go-here").appendChild(newcard);
-
-                //i++;   //Optional: iterate variable to serve as unique ID
-            })
-        })
-}
-
 // Example usage:
 // Call the function with the class name of elements you want to add stars to
 
 displayHistoryLoop();
 displayDailyQuest();
 displayScore();
-displayCardsDynamically("events");  //input param is the name of the collection
-// eventSignupURLgenerator("events");
