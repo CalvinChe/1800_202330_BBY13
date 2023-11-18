@@ -1,4 +1,3 @@
-const testUserID = "cNsDxf94TxsP8HOsH2IK";
 var currentUser;
 firebase.auth().onAuthStateChanged(user => {
     // Check if user is signed in:

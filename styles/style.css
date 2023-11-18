@@ -234,3 +234,36 @@ h1 {
     align-self: center;
     margin: 2%;
 }
+
+.firebaseui-title {
+    color: black;
+}
+
+.firebaseui-link {
+    color: #a3d366;
+}
+
+.mdl-button--raised.mdl-button--colored {
+    background:#a3d366;
+}
+
+.mb-4 {
+    background-color: #C6E4A0;
+}
+
+.firebaseui-container {
+    border-radius: 20px 50px;
+    margin-top: 5%;
+}
+
+.firebaseui-textfield.mdl-textfield .firebaseui-label::after {
+    background-color: #a3d366;
+}
+
+.mdl-button--raised.mdl-button--colored:active {
+    background-color: #C6E4A0;
+}
+
+.mdl-button--raised.mdl-button--colored:hover {
+    background-color: #C6E4A0;
+}
