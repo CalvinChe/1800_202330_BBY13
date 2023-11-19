@@ -4,35 +4,7 @@ body {
 }
 
 .primary {
-    background-color: #a3d366;
-}
-
-.option a {
-    display: block;
-    margin-top: 20px;
-    color: black;
-    text-decoration: none;
-    font-size: 1.5rem;
-    font-weight: 700;
-}
-
-.option img {
-    width: 90%;
-    height: 250px;
-    object-fit: cover;
-    display: block;
-    margin: 25px auto 5px;
-    border-radius: 2%;
-}
-
-.option span {
-    display: block;
-    text-align: center;
-}
-
-.event, .portrait {
-    border: gray 1px solid;
-    border-radius: 5px;
+    background-color: #a0d070;
 }
 
 .real-event, .real-person {
@@ -71,131 +43,6 @@ body {
     font-size: 0.65rem;
 }
 
-.event-header .name {
-    font-size: 2rem;
-    font-weight: 700;
-}
-
-.event-header img {
-    width: 3rem;
-    height: 3rem;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.event-header .host {
-    margin-top: 0.3rem;
-}
-
-.event-header p {
-    display: inline-block;
-    vertical-align: top;
-    margin-left: 0.5rem;
-}
-
-.event-header .host span {
-    font-weight: 500;
-}
-
-.info {
-    display: grid;
-    grid-template-columns: 10% 80%;
-    line-height: 0.8rem;
-    grid-row-gap: 1rem;
-}
-
-.info .icon {
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.container .map {
-    display: grid;
-    place-items: center;
-}
-
-.container .map img {
-    width: 90%;
-    height: 400px;
-    object-fit: cover;
-}
-
-.details .content-header, .photos {
-    font-size: 1.5rem;
-    font-weight: 500;
-}
-
-.register-bar .free-spots{
-    font-size: 1.2rem;
-    display: inline-block;
-    line-height: 1rem;
-    padding: 1rem 1rem 0rem;
-}
-
-.register-bar .free {
-    font-weight: 500;
-}
-
-.register-bar .share, .register-bar .register {
-    display: inline-block;
-}
-
-.register-bar .share button {
-    font-size: 1.6rem;
-    background-color: white;
-    border: solid 1px cadetblue;
-    border-radius: 6px;
-    padding: 0.6rem 1rem;
-}
-
-.register-bar .register button {
-    font-size: 1.6rem;
-    color: white;
-    background-color: crimson;
-    border: none;
-    border-radius: 8px;
-    padding: 0.6rem 0.8rem;
-}
-
-.register-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem;
-    margin-top: 3rem;
-    margin-bottom: 2rem;
-}
-
-form .name {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin-bottom: 2rem;
-}
-
-form .name input, form .address input {
-    width: 90%;
-    height: 90%;
-}
-
-form .info {
-    margin-bottom: 2rem;
-}
-
-form .info label {
-    white-space: nowrap;
-}
-
-form .info input {
-    width: 950%;
-    height: 180%;
-}
-
-form .address {
-    display: grid;
-    grid-template-columns: 6fr 2fr 3fr;
-    margin-bottom: 2rem;
-}
-
 .text-cut {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -213,8 +60,8 @@ form .address {
     margin: 10px;
 }
 
-.btn {
-    background-color: #a3d366;
+.btn-theme {
+    background-color: #a0d070;
     color: black;
 }
 

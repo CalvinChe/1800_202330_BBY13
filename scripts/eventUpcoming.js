@@ -38,8 +38,7 @@ function displayCardsDynamically(collection) {
                     //get the user name
                     var bookmarks = userDoc.data().bookmarks;
                     if (bookmarks.includes(docID)) {
-                        document.getElementById('save-' + docID).classList.remove("bi-bookmarks");
-                        document.getElementById('save-' + docID).classList.add("bi-bookmarks-fill");
+                        document.getElementById('save-' + docID).classList.replace("bi-bookmarks", "bi-bookmarks-fill");
                     }
                 })
 
