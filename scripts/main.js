@@ -41,6 +41,27 @@ function displayHistoryLoop() {
 
 }
 
+const addBtn = document.getElementById("badge");
+
+function createParticle() {
+    for (let i = 0; i < 25; i++) {
+      const particle = document.createElement("div");
+      particle.classList.add("particle");
+      particle.innerHTML = "<h1>&#11088</h1>";
+      particle.style.left = Math.floor(Math.random() * 95)  + '%';
+      particle.style.top = Math.floor(Math.random() * 110) -25 + '%';
+      particle.addEventListener("animationend", function() {
+        particle.remove();
+      });
+    addBtn.append(particle);
+  }
+  return particle;
+}
+
+addBtn.addEventListener("click", function() {
+  createParticle();
+});
+
 // write a test user into database to use in profile and main page.
 function writeTestUser() {
     // Log Example
@@ -182,6 +203,6 @@ function writeEvents() {
 // Example usage:
 // Call the function with the class name of elements you want to add stars to
 
-displayHistoryLoop();
+// displayHistoryLoop();
 displayDailyQuest();
-displayScore();
+// displayScore();

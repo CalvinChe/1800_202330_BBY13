@@ -22,26 +22,26 @@
     <!-------------------------------------------------------->
     <!-- Firebase 8 Library related CSS, JS, JQuery go here -->
     <!-------------------------------------------------------->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script> 
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script> 
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>   
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" /> 
-    
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/styleMain.css">
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
 
     <!-- Link to Firebase API-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script> 
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script> 
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script> 
-    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>  
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" /> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
     <script src="./scripts/firebaseAPI_BBY13.js"></script>
 
 </head>
@@ -64,8 +64,16 @@
             </div>
         </div>
 
-        <div class="score mx-auto mb-5" id="userScore">45</div>
-        
+        <div class="progress mb-3">
+            exp
+            <div class="progress-bar w-25" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                25%
+            </div>
+        </div>
+        <button class="btn" id="badge">
+            <img src="images/Badges/Rank1.png" alt="">
+        </button>
+
         <!-- History text box -->
         <div class="card">
             <div id="history-go-here" class="card-body history overflow-auto d-flex flex-column">
@@ -73,16 +81,16 @@
             </div>
         </div>
     </div>
-        
+
     <!-- Navbar -->
     <nav id="navbarPlaceholder"></nav>
 
     <!-- Template for history content -->
     <template id="history-content">
-        <p class="mx-auto" >
+        <p class="mx-auto">
             ---------------
             <span id="history-date">MMM:DD</span>
-               ---
+            ---
             <span id="history-activity">e.g. Ride a bike</span>
             ---------------
         </p>

@@ -15,10 +15,57 @@
     align-items: center;
 }
 
+.btn {
+    display: block;
+    align-self: center;
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+    outline: none;
+    transition: all 0.5s;
+    animation-iteration-count: 1;
+}
+
+/* .btn:active {
+    transform: scale(1.1);
+} */
+
+.btn img {
+    max-width: 100%;
+    border-radius: 50%;
+}
+
+.particle {
+    position: absolute;
+}
+
+.particle {
+    width: 35px;
+    height: 40px;
+    text-align: center;
+    animation: particle-animation 3s ease-out;
+    overflow: hidden;
+}
+
+@keyframes particle-animation {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 100%;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(200%);
+    }
+}
+
 .history {
     max-height: 7em;
 }
 
 .offcanvas-bottom {
-    min-height: 35vh; 
+    min-height: 35vh;
 }
