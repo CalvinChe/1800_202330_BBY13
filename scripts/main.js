@@ -41,7 +41,7 @@ function displayHistoryLoop() {
 
 }
 
-const addBtn = document.getElementById("badge");
+const addBtn = document.getElementById("content-body");
 
 function createParticle() {
     for (let i = 0; i < 25; i++) {
@@ -55,7 +55,6 @@ function createParticle() {
       });
     addBtn.append(particle);
   }
-  return particle;
 }
 
 addBtn.addEventListener("click", function() {

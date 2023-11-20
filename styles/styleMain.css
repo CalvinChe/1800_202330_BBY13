@@ -26,9 +26,9 @@
     animation-iteration-count: 1;
 }
 
-/* .btn:active {
+.btn:active {
     transform: scale(1.1);
-} */
+}
 
 .btn img {
     max-width: 100%;
@@ -40,11 +40,16 @@
 }
 
 .particle {
-    width: 35px;
-    height: 40px;
+    width: 40px;
+    height: 45px;
     text-align: center;
     animation: particle-animation 3s ease-out;
     overflow: hidden;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
 }
 
 @keyframes particle-animation {
