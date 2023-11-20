@@ -27,7 +27,7 @@ function displayUserProfilePictureAndLevel() {
           //get the data fields of the user
           var userProfilePic = userDoc.data().profilePic;
           var userLevel = userDoc.data().level;
-
+          
           if (userProfilePic != null) {
             const image = document.getElementById("profilePic");
             image.src = userProfilePic;
@@ -44,6 +44,24 @@ function displayUserProfilePictureAndLevel() {
   });
 }
 
+//
+function updateLevelDynamically() {
+  firebase.auth().onAuthStateChanged(user => {
+    // Check if user is signed in:
+    if (user) {
+      //go to the correct user document by referencing to the user uid
+      currentUser = db.collection("users").doc(user.uid)
+      currentUser.onSnapshot((doc) => {
+        console.log("current level: ", doc.data().level);
+      });
+    } else {
+      // No user is signed in.
+      console.log("No user is signed in");
+    }
+  });
+}
+
+// updateLevelDynamically();
 displayUserProfilePictureAndLevel();
 
 //-----------------------------------------------------------------------------
