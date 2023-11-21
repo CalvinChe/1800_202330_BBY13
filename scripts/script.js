@@ -28,7 +28,7 @@ function displayUserProfilePictureAndLevel() {
           var userProfilePic = userDoc.data().profilePic;
           var userLevel = userDoc.data().level;
           
-          if (userProfilePic != null) {
+          if (userProfilePic) {
             const image = document.getElementById("profilePic");
             image.src = userProfilePic;
           }

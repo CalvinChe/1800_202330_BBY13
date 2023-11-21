@@ -37,7 +37,7 @@ function populateUserInfo() {
                     if (userTitle != null) {
                         document.getElementById("userTitle").innerText = userTitle;
                     }
-                    if (userProfilePic != null) {
+                    if (userProfilePic) {
                         let image = document.getElementById("userPic");
                         image.src = userProfilePic;
                     }
