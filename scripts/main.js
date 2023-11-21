@@ -55,8 +55,9 @@ function displayExp() {
                         levelXP = 10 * (1.1 ** (i - 1)) // calculation for dynamic level scaling
                         expRequire += levelXP;
                     }
-                    expPer = userScore / expRequire;
-                    document.getElementById("exp").innerHTML = Math.round(expPer * 100) / 100 + "%";
+                    expPer = Math.round((userScore / expRequire) * 100);
+                    document.getElementById("exp").innerHTML = expPer + "%";
+                    document.getElementById("exp").style.width = expPer + "%";
                     ;
                 })
         } else {
