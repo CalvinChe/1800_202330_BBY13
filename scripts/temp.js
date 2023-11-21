@@ -18,7 +18,7 @@ function eventSignup(eventDocID) {
 }
 
 function updateButtonState(button, bool) {
-    let updateButton = bool ? "Request to Join" : "Registed";
+    let updateButton = bool ? "Request to Join" : "Registered";
     button.innerHTML = updateButton;
     button.classList.toggle("btn-danger");
 }
@@ -27,10 +27,10 @@ function updateFirestore(eventDocID, bool) {
     var updateField = bool ? 'arrayRemove' : 'arrayUnion';
 
     currentUser.update({
-        registed_events: firebase.firestore.FieldValue[updateField](eventDocID)
+        registered_events: firebase.firestore.FieldValue[updateField](eventDocID)
     })
         .then(function () {
-            let action = bool ? 'unregisted' : 'registed';
+            let action = bool ? 'unregistered' : 'registered';
             console.log("User has " + action + " for event " + eventDocID);
         })
         .catch(function (error) {

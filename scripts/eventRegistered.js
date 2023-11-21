@@ -6,7 +6,7 @@ function doAll() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {
             insertNameFromFirestore(user);
-            getRegistedEvent(user)
+            getRegisteredEvent(user)
         } else {
             console.log("No user is signed in");
         }
@@ -19,17 +19,17 @@ doAll();
 // and retrieves the "saved" array (of bookmarks) 
 // and dynamically displays them in the gallery
 //----------------------------------------------------------
-function getRegistedEvent(user) {
+function getRegisteredEvent(user) {
     db.collection("users").doc(user.uid).get().then(userDoc => {
         // Get the Array of bookmarks
-        var registed = userDoc.data().registed_events;
-        console.log(registed);
+        var registered = userDoc.data().registered_events;
+        console.log(registered);
 
         // Get pointer the new card template
-        let cardTemplate = document.getElementById("registedCardTemplate"); // Retrieve the HTML element with the ID "hikeCardTemplate" and store it in the cardTemplate variable. 
+        let cardTemplate = document.getElementById("registeredCardTemplate"); // Retrieve the HTML element with the ID "hikeCardTemplate" and store it in the cardTemplate variable. 
 
         // Iterate through the ARRAY of bookmarked hikes (document ID's)
-        registed.forEach(thisEventID => {
+        registered.forEach(thisEventID => {
             console.log(thisEventID);
             db.collection("events").doc(thisEventID).get().then(doc => {  //iterate thru each doc
                 var code = doc.data().code;    //get unique ID to each hike to be used for fetching right image
