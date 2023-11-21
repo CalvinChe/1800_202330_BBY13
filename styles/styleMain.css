@@ -15,7 +15,7 @@
     align-items: center;
 }
 
-.btn {
+.btn-badge {
     display: block;
     align-self: center;
     height: 300px;
@@ -26,11 +26,11 @@
     animation-iteration-count: 1;
 }
 
-.btn:active {
+.btn-badge:active {
     transform: scale(1.1);
 }
 
-.btn img {
+.btn-badge img {
     max-width: 100%;
     border-radius: 50%;
 }

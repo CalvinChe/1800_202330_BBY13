@@ -38,6 +38,34 @@ function displayBadge() {
     });
 }
 
+function displayExp() {
+    firebase.auth().onAuthStateChanged(user => {
+        // Check if user is signed in:
+        if (user) {
+            //go to the correct user document by referencing to the user uid
+            currentUser = db.collection("users").doc(user.uid)
+            //get the document for current user.
+            currentUser.get()
+                .then(userDoc => {
+                    var userScore = userDoc.data().ecoScore;
+                    var userLevel = userDoc.data().level;
+                    var levelXP;
+                    var expRequire = 0;
+                    for (let i = 1; i <= userLevel; i++) { // loop to get total xp needed currently
+                        levelXP = 10 * (1.1 ** (i - 1)) // calculation for dynamic level scaling
+                        expRequire += levelXP;
+                    }
+                    expPer = userScore / expRequire;
+                    document.getElementById("exp").innerHTML = Math.round(expPer * 100) / 100 + "%";
+                    ;
+                })
+        } else {
+            // No user is signed in.
+            console.log("No user is signed in");
+        }
+    });
+}
+
 
 function displayHistoryLoop() {
     let historyTemplate = document.getElementById("history-content");
@@ -227,4 +255,5 @@ function writeEvents() {
 // displayHistoryLoop();
 displayDailyQuest();
 displayBadge();
+displayExp();
 // displayScore();
