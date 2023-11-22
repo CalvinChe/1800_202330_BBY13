@@ -1,6 +1,9 @@
 body {
     padding-top: 105px;
     padding-bottom: 85px;
+    background-image: url("../images/leafbackground.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 /* Navbar style */
