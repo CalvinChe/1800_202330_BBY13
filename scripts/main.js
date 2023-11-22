@@ -51,11 +51,13 @@ function displayExp() {
                     var userLevel = userDoc.data().level;
                     var levelXP;
                     var expRequire = 0;
+                    var prev = 0;
                     for (let i = 1; i <= userLevel; i++) { // loop to get total xp needed currently
                         levelXP = 10 * (1.1 ** (i - 1)) // calculation for dynamic level scaling
+                        prev = expRequire;
                         expRequire += levelXP;
                     }
-                    expPer = Math.round((userScore / expRequire) * 100);
+                    expPer = Math.round(((userScore - prev) / (expRequire - prev)) * 100);
                     document.getElementById("exp").innerHTML = expPer + "%";
                     document.getElementById("exp").style.width = expPer + "%";
                     ;
