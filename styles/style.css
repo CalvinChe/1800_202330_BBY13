@@ -102,9 +102,9 @@ h1 {
 }
 
 .planet {
-    width: 20%;
+    width: 40%;
     align-self: center;
-    margin: 2%;
+    margin-top: 5%;
 }
 
 .firebaseui-title {
