@@ -15,6 +15,10 @@
     align-items: center;
 }
 
+.progress p {
+    padding: 0 1em;
+}
+
 .btn-badge {
     display: block;
     align-self: center;
