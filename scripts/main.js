@@ -93,7 +93,6 @@ function displayHistoryLoop() {
 
 }
 
-const body = document.getElementById("content-body");
 const addBtn = document.getElementById("badge");
 
 function createParticle() {
@@ -106,7 +105,7 @@ function createParticle() {
         particle.addEventListener("animationend", function () {
             particle.remove();
         });
-        body.append(particle);
+        document.body.append(particle);
     }
 }
 
