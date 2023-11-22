@@ -15,6 +15,11 @@ a.nav-link {
     display: block;
 }
 
+#logo {
+    width: 75px;
+    height: auto;
+}
+
 /* ------------ */
 
 .primary {
