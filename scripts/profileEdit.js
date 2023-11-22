@@ -66,6 +66,10 @@ function saveUserInfo() {
     var userDescription = document.getElementById("descriptionInput").value;
     var userTitle = document.getElementById("titleInput").value;
     var userPostalCode = document.getElementById("postalCodeInput").value;
+    var fileInput = document.getElementById("mypic-input");
+    if (fileInput.value) {
+        uploadPic(document.getElementById('nameInput').value);
+    }
     currentUser.update({
         name: userName,
         school: userSchool,
@@ -77,11 +81,8 @@ function saveUserInfo() {
     })
     .then(() => {
         console.log("Document successfully updated!");
-        uploadPic(document.getElementById('nameInput').value);
         // window.location.href = "profile.html"; // Redirect to the profile page. (causes image to not be uploaded properly)
     })
-
-    document.getElementById('personalInfoFields').disabled = true;
 }
 
 var ImageFile;

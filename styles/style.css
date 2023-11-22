@@ -3,6 +3,19 @@ body {
     padding-bottom: 85px;
 }
 
+/* Navbar style */
+a.nav-link {
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+}
+
+.icon-text {
+    display: block;
+}
+
+/* ------------ */
+
 .primary {
     background-color: #a0d070;
 }
