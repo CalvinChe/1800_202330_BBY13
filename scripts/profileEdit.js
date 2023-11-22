@@ -80,8 +80,8 @@ function saveUserInfo() {
         postalCode: userPostalCode
     })
     .then(() => {
-        console.log("Document successfully updated!");
-        // window.location.href = "profile.html"; // Redirect to the profile page. (causes image to not be uploaded properly)
+        // console.log("Document successfully updated!");
+        window.location.href = "profile.html"; // Redirect to the profile page. (causes image to not be uploaded properly)
     })
 }
 
