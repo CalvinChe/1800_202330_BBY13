@@ -56,29 +56,31 @@
 
     <!-- Stuff for body goes here -->
 
-    <div id="content-body" class="container d-flex flex-column">
-        <div class="card mb-5">
-            <div class="card-body">
-                <h5 class="card-title">Daily Quest</h5>
-                <p class="card-text" id="dailyQuest">current Daily quest</p>
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Daily Quest</h5>
+            <p class="card-text" id="dailyQuest">current Daily quest</p>
+        </div>
+    </div>
+    <div class="card mb-3">
+        <div class="progress">
+            <p>Level Progress</p>
+            <div id="exp" class="progress-bar bg-success" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                aria-valuemax="100">
+                0%
             </div>
         </div>
-
-        <div class="progress mb-3">
-            exp
-            <div id="exp" class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-                25%
-            </div>
-        </div>
-        <button class="btn btn-badge" id="badge">
+    </div>
+    <div class="container d-flex flex-column">
+        <button class="btn btn-badge d-flex justify-content-center" id="badge">
             <img id="badgeImg" src="" alt="">
         </button>
+    </div>
 
-        <!-- History text box -->
-        <div class="card">
-            <div id="history-go-here" class="card-body history overflow-auto d-flex flex-column">
-                <!-- history content -->
-            </div>
+    <!-- History text box -->
+    <div class="card">
+        <div id="history-go-here" class="card-body history overflow-auto d-flex flex-column">
+            <!-- history content -->
         </div>
     </div>
 

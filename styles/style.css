@@ -5,13 +5,19 @@ body {
 
 /* Navbar style */
 a.nav-link {
-    vertical-align: top;
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
     text-align: center;
+    padding: 0;
 }
 
 .icon-text {
     display: block;
+}
+
+#logo {
+    width: 75px;
+    height: auto;
 }
 
 /* ------------ */
@@ -76,8 +82,11 @@ a.nav-link {
 }
 
 .card {
-    width: 90%;
-    margin: 10px;
+    width: 90vw;
+    margin: auto;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    
 }
 
 .btn-theme {
@@ -105,9 +114,9 @@ h1 {
 }
 
 .planet {
-    width: 20%;
+    width: 40%;
     align-self: center;
-    margin: 2%;
+    margin-top: 5%;
 }
 
 .firebaseui-title {
@@ -194,12 +203,11 @@ h1 {
 .popup .content {
     max-height: 30%;
     overflow: auto;
-}
+  }
 
-.fa{
-    position: absolute;
-    pointer-events: none;
-    top: 15px;
-    right: 30px;
-    color:#fff;
+
+#points-card {
+  font-size: 16pt;
+  text-align: center;
+  margin: 5%;
 }
