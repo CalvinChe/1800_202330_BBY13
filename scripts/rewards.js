@@ -47,6 +47,22 @@ function displayCardsDynamically(collection) {
 
 displayCardsDynamically("rewards");  //input param is the name of the collection
 
+function showPoints() {
+    firebase.auth().onAuthStateChanged(user => {
+        // Check if user is signed in:
+        if (user) {
+            currentUser = db.collection("users").doc(user.uid)
+            currentUser.get().then(userDoc => {
+                pointShow = userDoc.data().points;
+                document.getElementById("points-card").innerHTML = ("<b>Current points: </b>" + pointShow);
+            })
+        }
+    })
+}
+
+showPoints();
+
+
 function checkReward(button) {
     var userPoints;
     var rewardCost;
@@ -64,7 +80,8 @@ function checkReward(button) {
                 if (userPoints > rewardCost) {
                     currentUser.update({
                         points: firebase.firestore.FieldValue.increment(-rewardCost)
-                    })
+                        
+                    }).then(setTimeout(showPoints, 500))
                     document.getElementById("redeemTitle").innerHTML = "Congratulations!";
                     document.getElementById("redeemContent").innerHTML = "Check your e-mail for redemption information.";
                 } else {
