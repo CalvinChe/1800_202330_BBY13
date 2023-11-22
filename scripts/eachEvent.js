@@ -39,9 +39,9 @@ function displayEventInfo() {
             button.onclick = () => eventSignup();
 
             currentUser.get().then(userDoc => {
-                let registered = userDoc.data().registered_events;
-                if (registered.includes(docID)) {
-                    button.innerHTML = "Registered";
+                let attending = userDoc.data().attending_events;
+                if (attending.includes(docID)) {
+                    button.innerHTML = "Requested";
                     button.classList.toggle("btn-danger");
                     button.classList.toggle("btn-secondary");
                 }
@@ -59,7 +59,7 @@ function eventSignup() {
 
 //Return Original button if bool == false
 function updateButtonState(button, bool) {
-    let updateButton = bool ? "Registered" : "Request to Join";
+    let updateButton = bool ? "Requested" : "Request to Join";
     button.innerHTML = updateButton;
 
     button.classList.toggle("btn-danger");
@@ -74,7 +74,7 @@ function updateFirestore(bool) {
     let updateField = bool ? 'arrayUnion' : 'arrayRemove';
 
     currentUser.update({
-        registered_events: firebase.firestore.FieldValue[updateField](docID)
+        attending_events: firebase.firestore.FieldValue[updateField](docID)
     })
         .catch(function (error) {
             console.error("Error updating event:", error);

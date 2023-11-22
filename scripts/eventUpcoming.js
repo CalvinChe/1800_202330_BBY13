@@ -15,13 +15,13 @@ function displayCardsDynamically(collection) {
         .then(allEvents => {
             //var i = 1;  //Optional: if you want to have a unique ID for each hike
             allEvents.forEach(doc => { //iterate thru each doc
-                var code = doc.data().code;    //get unique ID to each hike to be used for fetching right image
-                var name = doc.data().name;       // get value of the "name" key
-                var time = doc.data().day + " · " + doc.data().time + " " + doc.data().timezone;
-                var rate = doc.data().rate;
-                var attend = doc.data().attendees + " attendees · " + doc.data().remains + " spots remain";
-                var details = doc.data().details;  // get value of the "details" key
-                var docID = doc.id;
+                let code = doc.data().code;    //get unique ID to each hike to be used for fetching right image
+                let name = doc.data().name;       // get value of the "name" key
+                let time = doc.data().day + " · " + doc.data().time + " " + doc.data().timezone;
+                let rate = doc.data().rate;
+                let attend = doc.data().attendees + " attendees · " + doc.data().remains + " spots remain";
+                let details = doc.data().details;  // get value of the "details" key
+                let docID = doc.id;
                 let newcard = cardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
 
                 //update title and text and image
@@ -33,6 +33,8 @@ function displayCardsDynamically(collection) {
                 newcard.querySelector('a').href = "eachEvent.html?docID=" + docID;
                 newcard.querySelector('.bookmark').id = 'save-' + docID;   //guaranteed to be unique
                 newcard.querySelector('.bookmark').onclick = () => bookmark(docID);
+                element = newcard.querySelector('.card-rating');
+                displayRate(element, rate);
 
                 currentUser.get().then(userDoc => {
                     //get the user name
