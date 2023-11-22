@@ -93,7 +93,6 @@ function displayHistoryLoop() {
 
 }
 
-const body = document.getElementById("content-body");
 const addBtn = document.getElementById("badge");
 
 function createParticle() {
@@ -106,13 +105,69 @@ function createParticle() {
         particle.addEventListener("animationend", function () {
             particle.remove();
         });
-        body.append(particle);
+        document.body.append(particle);
     }
 }
 
 addBtn.addEventListener("click", function () {
     createParticle();
 });
+
+document.getElementById("questCardMain").addEventListener("click", function() {
+    window.location.href = "activities.html";
+});
+
+function dailyQuestTimer() {
+    var timer = document.getElementById("timer");
+    var date = new Date();
+    var hour =  23 - date.getHours();
+    var minute =  59 - date.getMinutes();
+    var seconds =  59 - date.getSeconds();
+    hour = ("0" + hour).slice(-2);
+    minute = ("0" + minute).slice(-2);
+    seconds = ("0" + seconds).slice(-2);
+    timer.innerText = "Time Remaining: " + hour + ":" + minute + ":" + seconds;
+}
+
+// display how much time is remaining for you to complete your daily quest.
+dailyQuestTimer();
+var refreshTimer = setInterval(dailyQuestTimer, 1000);
+
+function checkDailyCompletion() {
+    firebase.auth().onAuthStateChanged(user => {
+        // Check if user is signed in:
+        if (user) {
+            //go to the correct user document by referencing to the user uid
+            currentUser = db.collection("users").doc(user.uid)
+            //get the document for current user.
+            currentUser.get()
+                .then(userDoc => {
+                    var daily = userDoc.data().dailyCompletion;
+                    if (daily) {
+                        clearInterval(refreshTimer);
+                        var dailyBody = document.getElementById("dailyBody");
+                        dailyBody.innerHTML = "";
+                        var dailyTitle = document.createElement("h3");
+                        dailyTitle.classList.add("card-title");
+                        dailyTitle.classList.add("text-center");
+                        dailyTitle.innerText = "Daily Quest";
+                        dailyBody.append(dailyTitle);
+                        const complete = document.createElement("h1");
+                        complete.classList.add("card-title");
+                        complete.classList.add("text-center");
+                        complete.classList.add("text-success");
+                        complete.innerText = "COMPLETE";
+                        dailyBody.append(complete);
+                    }
+                })
+        } else {
+            // No user is signed in.
+            console.log("No user is signed in");
+        }
+    });
+}
+
+checkDailyCompletion();
 
 // write a test user into database to use in profile and main page.
 function writeTestUser() {

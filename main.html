@@ -56,10 +56,11 @@
 
     <!-- Stuff for body goes here -->
 
-    <div class="card mb-3">
-        <div class="card-body">
-            <h5 class="card-title">Daily Quest</h5>
-            <p class="card-text" id="dailyQuest">current Daily quest</p>
+    <div id="questCardMain" class="card mb-3">
+        <div id="dailyBody" class="card-body">
+            <h3 class="card-title text-center">Daily Quest</h3>
+            <p class="card-text text-center" id="dailyQuest">current Daily quest</p>
+            <p class="card-text text-center" id="timer"></p>
         </div>
     </div>
     <div class="card mb-3">
@@ -79,6 +80,7 @@
 
     <!-- History text box -->
     <div class="card">
+        <h3 class="text-center mt-1">History</h3>
         <div id="history-go-here" class="card-body history overflow-auto d-flex flex-column">
             <!-- history content -->
         </div>

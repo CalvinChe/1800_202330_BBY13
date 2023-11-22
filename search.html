@@ -78,15 +78,26 @@
                Register for your favorite events and join our community today!
             </p>
             <div class="btn-group">
-               <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
+               <button type="button" class="btn btn-success rounded me-2" data-bs-toggle="dropdown"
                   aria-expanded="false">
-                  Show more ...
+                  <i class="bi bi-caret-right-fill"></i>
+                  Show more
                </button>
                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="eventAttending.html">Attending</a></li>
                   <li><a class="dropdown-item" href="eventPast.html">Past</a></li>
-                  <li><a class="dropdown-item" href="eventRegistered.html">Registered</a></li>
                   <li><a class="dropdown-item" href="eventSaved.html">Saved</a></li>
                   <li><a class="dropdown-item" href="eventUpcoming.html">Upcoming</a></li>
+               </ul>
+            </div>
+            <div class="btn-group">
+               <button type="button" class="btn btn-success rounded" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-calendar-plus"></i>
+                  Your events
+               </button>
+               <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="eventCreate.html">Create an event</a></li>
+                  <li><a class="dropdown-item" href="eventHosting.html">Your events</a></li>
                </ul>
             </div>
          </div>
