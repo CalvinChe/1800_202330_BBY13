@@ -1,4 +1,6 @@
 body {
+    padding-top: 105px !important;
+    padding-bottom: 85px !important;
     padding-top: 105px;
     padding-bottom: 85px;
     background-image: url("../images/leafbackground.jpg");
@@ -135,10 +137,6 @@ h1 {
     background: #a3d366;
 }
 
-.mb-4 {
-    background-color: #C6E4A0;
-}
-
 .firebaseui-container {
     border-radius: 20px 50px;
     margin-top: 5%;
@@ -215,8 +213,20 @@ h1 {
     margin: 5%;
 }
 
+#points-card {
+    font-size: 16pt;
+    text-align: center;
+    margin: 5%;
+}
+
+#eventName::placeholder {
+    font-size: 1.5rem;
+    padding-top: 0.5rem;
+}
+
 #levelProgress {
     text-align: center;
     margin-bottom: 0;
+    font-weight: bold;
     font-weight: bold;
 }
