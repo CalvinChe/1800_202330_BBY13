@@ -1,5 +1,5 @@
 function loadSkeleton(){
-    console.log($('#navbarPlaceholder').load('./components/navbar.html'));
-    console.log($('#headerPlaceholder').load('./components/header.html'));
+    $('#navbarPlaceholder').load('./components/navbar.html');
+    $('#headerPlaceholder').load('./components/header.html');
 }
 loadSkeleton();
