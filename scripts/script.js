@@ -102,7 +102,6 @@ function insertNameFromFirestore(user) {
     console.log(userName)
     document.getElementById("name-goes-here").innerHTML = userName;
   })
-
 }
 
 function displayRate(element, star) {
@@ -117,18 +116,18 @@ function displayRate(element, star) {
 
   // Create and append Bootstrap star icons based on the star rating
   for (let i = 0; i < 5; i++) {
-      const starIcon = document.createElement("i");
-      starIcon.classList.add("bi"); // Add Bootstrap classes for an empty star
+    const starIcon = document.createElement("i");
+    starIcon.classList.add("bi"); // Add Bootstrap classes for an empty star
 
-      // Check if the current star should be filled (i < fullStars) or half-filled (i === fullStars and hasHalfStar is true)
-      if (i < fullStars) {
-          starIcon.classList.add("bi-star-fill"); // Add a class to fill the star
-      } else if (i === fullStars && hasHalfStar) {
-          starIcon.classList.add("bi-star-half"); // Add a class to fill the half-star
-      } else {
-        starIcon.classList.add("bi-star");
-      }
+    // Check if the current star should be filled (i < fullStars) or half-filled (i === fullStars and hasHalfStar is true)
+    if (i < fullStars) {
+      starIcon.classList.add("bi-star-fill"); // Add a class to fill the star
+    } else if (i === fullStars && hasHalfStar) {
+      starIcon.classList.add("bi-star-half"); // Add a class to fill the half-star
+    } else {
+      starIcon.classList.add("bi-star");
+    }
 
-      element.appendChild(starIcon);
+    element.appendChild(starIcon);
   }
 }

@@ -1,6 +1,6 @@
 body {
-    padding-top: 105px;
-    padding-bottom: 85px;
+    padding-top: 105px !important;
+    padding-bottom: 85px !important;
 }
 
 /* Navbar style */
@@ -81,14 +81,6 @@ a.nav-link {
     justify-content: center;
 }
 
-.card {
-    width: 90vw;
-    margin: auto;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    
-}
-
 .btn-theme {
     background-color: #a0d070;
     color: black;
@@ -129,10 +121,6 @@ h1 {
 
 .mdl-button--raised.mdl-button--colored {
     background: #a3d366;
-}
-
-.mb-4 {
-    background-color: #C6E4A0;
 }
 
 .firebaseui-container {
@@ -210,4 +198,9 @@ h1 {
   font-size: 16pt;
   text-align: center;
   margin: 5%;
+}
+
+#eventName::placeholder {
+    font-size: 1.5rem;
+    padding-top: 0.5rem;
 }
