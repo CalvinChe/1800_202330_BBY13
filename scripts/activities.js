@@ -38,7 +38,7 @@ function displayCardsDynamically(collection) {
 
                 //Optional: give unique ids to all elements for future use
                 newcard.querySelector('a').setAttribute("id", "" + title.toLowerCase());
-                // checkTodayCompleted("" + title.toLowerCase());
+                checkTodayCompleted("" + title.toLowerCase());
                 // newcard.querySelector('.card-text').setAttribute("id", "ctext" + i);
                 // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
 
