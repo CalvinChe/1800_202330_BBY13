@@ -77,24 +77,36 @@ function checkReward(button) {
             currentUser = db.collection("users").doc(user.uid)
             currentUser.get().then(userDoc => {
                 userPoints = userDoc.data().points;
-                if (userPoints > rewardCost) {
+                if (userPoints >= rewardCost) {
                     currentUser.update({
                         points: firebase.firestore.FieldValue.increment(-rewardCost)
-                        
-                    }).then(setTimeout(showPoints, 500))
-                    document.getElementById("redeemTitle").innerHTML = "Congratulations!";
-                    document.getElementById("redeemContent").innerHTML = "Check your e-mail for redemption information.";
+
+                    }).then(setTimeout(showPoints, 500)).then(function () {
+                        Swal.fire({
+                            title: "Congratulations!\nCheck your e-mail for redemption information.",
+                            width: 600,
+                            padding: "3em",
+                            color: "#716add",
+                            background: "#fff url(https://i.pinimg.com/1200x/7a/0a/e6/7a0ae642e99a24a0142e59d7f2c3c04f.jpg)",
+                            backdrop: `rgba(0,0,0,0.6)
+                                url("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExY3Nsa3hiNmNmbzhtdGxra2ZieWY1OWw2bmUyY3JiN3h6cGpqejMzNCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/fU4rqm0AHZtqGED9m4/giphy.gif")
+                                top
+                                no-repeat`
+                        })
+                    })
                 } else {
-                    document.getElementById("redeemTitle").innerHTML = "Oops!";
-                    document.getElementById("redeemContent").innerHTML = "Come back again when you have enough points.";
+                    Swal.fire({
+                        title: "Oops!\nCome back when you have more points.",
+                        width: 600,
+                        padding: "3em",
+                        color: "#716add",
+                        background: "#fff url(https://i.pinimg.com/1200x/7a/0a/e6/7a0ae642e99a24a0142e59d7f2c3c04f.jpg)",
+                        backdrop: 'rgba(0,0,0,0.6)'
+                                
+                    })
                 }
-            })
+            }
+            )
         }
     })
-}
-
-
-
-function redeemReward() {
-
 }

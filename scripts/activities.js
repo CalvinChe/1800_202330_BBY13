@@ -38,6 +38,7 @@ function displayCardsDynamically(collection) {
 
                 //Optional: give unique ids to all elements for future use
                 newcard.querySelector('a').setAttribute("id", "" + title.toLowerCase());
+                checkTodayCompleted("" + title.toLowerCase());
                 // newcard.querySelector('.card-text').setAttribute("id", "ctext" + i);
                 // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
 
@@ -50,6 +51,26 @@ function displayCardsDynamically(collection) {
 }
 
 displayCardsDynamically("activity");  //input param is the name of the collection
+
+function checkTodayCompleted(activityID) {
+    firebase.auth().onAuthStateChanged(user => {
+        // Check if user is signed in:
+        if (user) {
+            //go to the correct user document by referencing to the user uid
+            currentUser = db.collection("users").doc(user.uid)
+            //get the document for current user.
+            currentUser.get()
+                .then(userDoc => {
+                    //get the list of activities completed today for the user
+                    var todayCompleted = userDoc.data().today;
+                    if (todayCompleted.includes(activityID)) {
+                        //if activity is in the list, disable the complete button
+                        document.getElementById(activityID).className = "btn btn-primary card-href disabled";
+                    }
+                })
+        }
+    })
+}
 
 function completeActivity(button) {
     var userPoints;
