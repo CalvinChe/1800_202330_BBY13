@@ -38,7 +38,7 @@ function displayCardsDynamically(collection) {
 
                 //Optional: give unique ids to all elements for future use
                 newcard.querySelector('a').setAttribute("id", "" + title.toLowerCase());
-                checkTodayCompleted("" + title.toLowerCase());
+                // checkTodayCompleted("" + title.toLowerCase());
                 // newcard.querySelector('.card-text').setAttribute("id", "ctext" + i);
                 // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
 
@@ -51,6 +51,21 @@ function displayCardsDynamically(collection) {
 }
 
 displayCardsDynamically("activity");  //input param is the name of the collection
+
+function resetDailyCompletion() {
+    firebase.auth().onAuthStateChanged(user => {
+        // Check if user is signed in:
+        if (user) {
+            //go to the correct user document by referencing to the user uid
+            currentUser = db.collection("users").doc(user.uid)
+            //get the document for current user.
+            currentUser.get()
+                .then(userDoc => {
+                    var todayCompleted = user.doc().today;
+                })
+        }
+    })
+}
 
 function checkTodayCompleted(activityID) {
     firebase.auth().onAuthStateChanged(user => {
@@ -79,10 +94,18 @@ function completeActivity(button) {
     var userLevel;
     button.className = "btn btn-primary card-href disabled" //change button class to include disabled
     var activityID = button.id
-    console.log(activityID);
+    // console.log(activityID);
     db.collection('activity').doc(activityID).get().then((thisActivity => { // get the point value for the activity
         activityPts = thisActivity.data().score;
         // console.log(activityPts);
+        Swal.fire({
+            title: "Success!",
+            text: activityPts + " points have been added to your account.",
+            icon: "success",
+            customClass: {
+                confirmButton: "redirectDelay"
+            }
+        })
     }))
     firebase.auth().onAuthStateChanged(user => {
         // Check if user is signed in:
@@ -110,12 +133,18 @@ function increaseLevel(userEcoScore, activityPts, userLevel, currentUser) { // c
     if (calculateUserLevel((userEcoScore + activityPts), userLevel) > userLevel) {
         currentUser.update({ // upsdates user level if necessary
             level: firebase.firestore.FieldValue.increment(1)
-        }).then(setTimeout(redirectCongrats, 200)) // redirect to congrats page upon level up
+        }).then(setTimeout(redirectCongrats, 400)) // redirect to congrats page upon level up
     }
 }
 
 function redirectCongrats() {
-    window.location.href = "levelCongrats.html";
+    var wait = document.getElementsByClassName("redirectDelay")
+    // console.log(wait);
+    for (let item of wait) {
+        item.addEventListener("click", () => {
+            window.location.href = "levelCongrats.html";
+        })
+    }
 }
 
 function calculateUserLevel(exp, userLevel) { // calculates user level
@@ -130,6 +159,7 @@ function calculateUserLevel(exp, userLevel) { // calculates user level
     }
     return userLevel;
 }
+
 
 
 
