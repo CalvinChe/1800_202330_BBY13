@@ -1,14 +1,11 @@
 body {
-<<<<<<< HEAD
     padding-top: 105px !important;
     padding-bottom: 85px !important;
-=======
     padding-top: 105px;
     padding-bottom: 85px;
     background-image: url("../images/leafbackground.jpg");
     background-size: cover;
     background-repeat: no-repeat;
->>>>>>> refs/remotes/origin/main
 }
 
 /* Navbar style */
@@ -89,18 +86,15 @@ a.nav-link {
     justify-content: center;
 }
 
-<<<<<<< HEAD
-=======
 .card {
     width: 90vw;
     margin: auto;
     margin-bottom: 10px;
     margin-top: 10px;
     justify-content: center;
-    
+
 }
 
->>>>>>> refs/remotes/origin/main
 .btn-theme {
     background-color: #a0d070;
     color: black;
@@ -211,29 +205,27 @@ h1 {
 .popup .content {
     max-height: 30%;
     overflow: auto;
-  }
+}
 
-  #points-card {
+#points-card {
     font-size: 16pt;
     text-align: center;
     margin: 5%;
-  }
+}
 
-<<<<<<< HEAD
 #points-card {
-  font-size: 16pt;
-  text-align: center;
-  margin: 5%;
+    font-size: 16pt;
+    text-align: center;
+    margin: 5%;
 }
 
 #eventName::placeholder {
     font-size: 1.5rem;
     padding-top: 0.5rem;
 }
-=======
-  #levelProgress {
+
+#levelProgress {
     text-align: center;
     margin-bottom: 0;
     font-weight: bold;
-  }
->>>>>>> refs/remotes/origin/main
+}
