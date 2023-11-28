@@ -214,3 +214,9 @@ h1 {
     text-align: center;
     margin: 5%;
   }
+
+  #levelProgress {
+    text-align: center;
+    margin-bottom: 0;
+    font-weight: bold;
+  }

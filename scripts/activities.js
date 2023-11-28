@@ -61,8 +61,10 @@ function checkTodayCompleted(activityID) {
             //get the document for current user.
             currentUser.get()
                 .then(userDoc => {
+                    //get the list of activities completed today for the user
                     var todayCompleted = userDoc.data().today;
                     if (todayCompleted.includes(activityID)) {
+                        //if activity is in the list, disable the complete button
                         document.getElementById(activityID).className = "btn btn-primary card-href disabled";
                     }
                 })
