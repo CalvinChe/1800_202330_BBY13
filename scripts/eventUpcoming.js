@@ -15,26 +15,26 @@ function displayCardsDynamically(collection) {
         .then(allEvents => {
             //var i = 1;  //Optional: if you want to have a unique ID for each hike
             allEvents.forEach(doc => { //iterate thru each doc
-                let code = doc.data().code;    //get unique ID to each hike to be used for fetching right image
-                let name = doc.data().name;       // get value of the "name" key
-                let time = doc.data().day + " · " + doc.data().time + " " + doc.data().timezone;
-                let rate = doc.data().rate;
-                let attend = doc.data().attendees + " attendees · " + doc.data().remains + " spots remain";
-                let details = doc.data().details;  // get value of the "details" key
+                let title = doc.data().title;       // get value of the "name" key
+                let time = formatDate(doc.data().date) + " · " + formatTime(doc.data().time);
+                let image = doc.data().image;
+                // let rate = doc.data().rate;
+                let attendee = doc.data().attendee + " attendees";
+                let desc = doc.data().description;  // get value of the "details" key
                 let docID = doc.id;
                 let newcard = cardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
 
                 //update title and text and image
                 newcard.querySelector('.card-time').innerHTML = time;
-                newcard.querySelector('.card-title').innerHTML = name;
-                newcard.querySelector('.card-text').innerHTML = details;
-                newcard.querySelector('.card-attend').innerHTML = attend;
-                newcard.querySelector('.card-image').src = `./images/${code}.jpg`; //Example: NV01.jpg
+                newcard.querySelector('.card-title').innerHTML = title;
+                newcard.querySelector('.card-text').innerHTML = desc;
+                newcard.querySelector('.card-attend').innerHTML = attendee;
+                newcard.querySelector('.card-image').src = image; //Example: NV01.jpg
                 newcard.querySelector('a').href = "eachEvent.html?docID=" + docID;
                 newcard.querySelector('.bookmark').id = 'save-' + docID;   //guaranteed to be unique
                 newcard.querySelector('.bookmark').onclick = () => bookmark(docID);
-                element = newcard.querySelector('.card-rating');
-                displayRate(element, rate);
+                // element = newcard.querySelector('.card-rating');
+                // displayRate(element, rate);
 
                 currentUser.get().then(userDoc => {
                     //get the user name
@@ -85,3 +85,34 @@ function bookmark(eventDocID) {
 
 displayCardsDynamically("events");  //input param is the name of the collection
 
+function formatDate(inputDate) {
+    // Create a Date object from the input value
+    const dateObject = new Date(inputDate);
+
+    // Adjust the date to account for the local time zone offset
+    const offset = dateObject.getTimezoneOffset();
+    dateObject.setMinutes(dateObject.getMinutes() + offset);
+
+    // Format the date using Intl.DateTimeFormat
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(dateObject);
+
+    // Log the formatted date to the console
+    return formattedDate;
+}
+
+function formatTime(inputTime) {
+    // Split hours and minutes
+    var timeArray = inputTime.split(':');
+    var hours = parseInt(timeArray[0]);
+    var minutes = parseInt(timeArray[1]);
+
+    // Convert to 12-hour format
+    var ampm = hours >= 12 ? 'P.M.' : 'A.M.';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // 0 should be displayed as 12
+
+    // Format the output
+    var formattedTime = hours + ':' + (minutes < 10 ? '0' + minutes : minutes) + ' ' + ampm;
+    return formattedTime;
+}
