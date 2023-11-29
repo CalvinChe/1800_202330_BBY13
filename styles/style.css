@@ -241,3 +241,33 @@ h1 {
     margin-bottom: 0;
     font-weight: bold;
 }
+
+.users-card {
+    width: 360px;
+}
+
+.users-card-img {
+    height: 200px;
+    width: 200px;
+    margin-top: 50px;
+}
+
+.card-username {
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+.add-friend-btn {
+    float: right;
+}
+
+.users-rank-badge {
+    position: absolute;
+    width: 100px;
+    right: 10px;
+    top: 10px;
+}
+
+.btn {
+    background-color: #198754 !important;
+}
