@@ -20,6 +20,10 @@ a.nav-link {
     padding: 0;
 }
 
+.nav-item {
+    max-width: 20%;
+}
+
 .icon-text {
     display: block;
 }
