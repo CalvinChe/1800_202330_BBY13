@@ -81,7 +81,7 @@ function saveUserInfo() {
     })
     .then(() => {
         // console.log("Document successfully updated!");
-        window.location.href = "profile.html"; // Redirect to the profile page. (causes image to not be uploaded properly)
+        setTimeout(function() { window.location.href = "profile.html" }, 500); // Redirect to the profile page. (causes image to not be uploaded properly)
     })
 }
 
