@@ -66,7 +66,7 @@ document.getElementById("twitter-share").onclick = function () {
                 .then(userDoc => {
                     //get the data fields of the user
                     userName = userDoc.data().name;
-                    text = "Hi+my+name+is+" + userName +"%2C%0D%0AJoin+me+on+my+journey+to+be+more+eco-friendly%21%0A" + "Ecoquest.com" 
+                    text = "Hi+my+name+is+" + userName +"%2C%0D%0AJoin+me+on+my+journey+to+be+more+eco-friendly%21%0A" + "https://comp1800-bby13-2023.web.app" 
                     location.href = "https://twitter.com/intent/tweet?text=" + text;
                 })
         } else {
