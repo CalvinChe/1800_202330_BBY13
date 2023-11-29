@@ -147,7 +147,6 @@ function checkDailyCompletion() {
             currentUser.get()
                 .then(userDoc => {
                     var daily = userDoc.data().dailyCompletion;
-                    console.log(daily);
                     if (daily) {
                         clearInterval(refreshTimer);
                         var dailyBody = document.getElementById("dailyBody");
