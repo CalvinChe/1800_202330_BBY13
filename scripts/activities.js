@@ -117,11 +117,26 @@ function completeActivity(button) {
                 userLevel = userDoc.data().level;
                 userPoints = userDoc.data().points; // grab current points
                 userEcoScore = userDoc.data().ecoScore // grab current ecoScore
+                date = new Date(); // create date object for history
+                dateString = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+                var history = {
+                    event: activityID,
+                    date: dateString
+                };
+
+                db.collection('activity').doc(activityID).get().then(activity => {
+                    if (activity.data().daily) {
+                        currentUser.update({
+                            dailyCompletion: true
+                        })
+                    }
+                });
 
                 currentUser.update({
                     points: firebase.firestore.FieldValue.increment(activityPts), // increment user points by activity value
                     ecoScore: firebase.firestore.FieldValue.increment(activityPts), // increment user ecoScore
                     today: firebase.firestore.FieldValue.arrayUnion(activityID), // add completed activity to today array
+                    history: firebase.firestore.FieldValue.arrayUnion(history),
                 }).then(increaseLevel(userEcoScore, activityPts, userLevel, currentUser)) // call increase level function
             })
         }

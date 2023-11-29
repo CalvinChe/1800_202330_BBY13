@@ -31,6 +31,8 @@ var uiConfig = {
                    points: 0,
                    level: 1,
                    dailyCompletion: false,
+                   today: [],
+                   history: [],
                                              //optional default profile info
             }).then(function () {
                    console.log("New user added to firestore");
