@@ -23,14 +23,14 @@ function getAttendingEvent(user) {
     db.collection("users").doc(user.uid).get().then(userDoc => {
         // Get the Array of bookmarks
         var attending = userDoc.data().attending_events;
-        console.log(attending);
+        // console.log(attending);
 
         // Get pointer the new card template
         let cardTemplate = document.getElementById("attendingCardTemplate"); // Retrieve the HTML element with the ID "hikeCardTemplate" and store it in the cardTemplate variable. 
 
         // Iterate through the ARRAY of bookmarked hikes (document ID's)
         attending.forEach(thisEventID => {
-            console.log(thisEventID);
+            // console.log(thisEventID);
             db.collection("events").doc(thisEventID).get().then(doc => {  //iterate thru each doc
                 var code = doc.data().code;    //get unique ID to each hike to be used for fetching right image
                 var name = doc.data().name;       // get value of the "name" key

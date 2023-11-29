@@ -74,7 +74,7 @@ function bookmark(eventDocID) {
             icon.classList.toggle("bi-bookmarks");
             icon.classList.toggle("bi-bookmarks-fill");
             var action = icon.classList.contains("bi-bookmarks") ? 'saved' : 'removed';
-            console.log("Bookmark has been " + action + " for event " + eventDocID);
+            // console.log("Bookmark has been " + action + " for event " + eventDocID);
         })
         .catch(function (error) {
             console.error("Error updating bookmark:", error);

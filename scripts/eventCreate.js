@@ -43,7 +43,7 @@ function listenFileSelect() {
         ImageFile = e.target.files[0];   //Global variable
         var blob = URL.createObjectURL(ImageFile);
         image.src = blob; // Display this image
-        console.log(blob);
+        // console.log(blob);
     })
 }
 listenFileSelect();
@@ -72,8 +72,8 @@ function showMap() {
     // Get the user's location
     navigator.geolocation.getCurrentPosition(function (position) {
         userLocation = [position.coords.longitude, position.coords.latitude];
-        console.log(userLocation);
-        console.log(searchLocation);
+        // console.log(userLocation);
+        // console.log(searchLocation);
 
         // Add a marker to the map at the user's location
         userLocationMarker = new mapboxgl.Marker()
@@ -97,8 +97,8 @@ function showMap() {
     // Listen for the 'result' event from the geocoder (when a search is made)
     geocoder.on('result', function (e) {
         searchLocation = e.result.geometry.coordinates;
-        console.log(userLocation);
-        console.log(searchLocation);
+        // console.log(userLocation);
+        // console.log(searchLocation);
 
         // Add a marker to the map at the search location
         searchLocationMarker && searchLocationMarker.remove(); // Remove the previous search marker if it exists
