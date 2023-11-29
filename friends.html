@@ -27,8 +27,6 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!-- Link to styles of your own -->
     <link rel="stylesheet" href="./styles/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
-    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
     <!-- Link to Firebase API-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -60,8 +58,12 @@
     <Header id="headerPlaceholder"></Header>
 
     <!-- Stuff for body goes here -->
+    <div>
+        <a class="btn friends-btn" href="users.html"><span
+            class="material-symbols-outlined">person add</span></a>
+    </div>
     <div class="container">
-        <h1 style="font-size: 22pt; font-weight: bold;">Users</h1>
+        <h1 style="font-size: 22pt; font-weight: bold;" class="text-center">Friends</h1>
         <!-- Here is the container for cards  -->
         <div class="container">
             <div id="users-go-here" class="row row-cols-auto">
@@ -69,7 +71,7 @@
         </div>
     </div>
     <!-- Templates for general use, not displayed -->
-    <template id="userCardTemplate">
+    <template id="friendCardTemplate">
         <div class="card py-2 mx-2 align-items-center">
             <img class="card-image card-img-top rounded-circle users-card-img" src=" ..." alt="..." />
             <div class="card-body users-card">
@@ -81,7 +83,7 @@
                     bulk of the card's content.
                 </p>
                 <br/>
-                <a class="btn add-friend-btn btn-success card-href" onclick=addFriend(this)>Add Friend</a>
+                <!-- <a class="btn add-friend-btn btn-success card-href" onclick=addFriend(this)>Add Friend</a> -->
             </div>
             <img src=" ..." alt=" ..." class="users-rank-badge">
         </div>
@@ -97,7 +99,7 @@
     <!-- Link to scripts of your own -->
     <script src="./scripts/script.js"></script>
     <script src="./scripts/skeleton.js"></script>
-    <script src="./scripts/users.js"></script>
+    <script src="./scripts/friends.js"></script>
 </body>
 
 </html>
