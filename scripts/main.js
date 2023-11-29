@@ -71,25 +71,29 @@ function displayExp() {
 
 
 function displayHistoryLoop() {
-    let historyTemplate = document.getElementById("history-content");
-    var userRef = db.collection("users");
-
-    userRef.doc(testUserID).get().then(doc => {
-        var history = doc.data().history;
-        history.forEach(entry => {
-            var date = entry.date.toDate();
-            var month = date.toLocaleString('en-US', { month: 'short' });
-            var day = date.getDate();
-            var event = entry.event;
-            let newHistory = historyTemplate.content.cloneNode(true);
-            newHistory.querySelector("#history-date").innerHTML = month + " " + day;
-            newHistory.querySelector("#history-activity").innerHTML = event;
-            console.log("Event: " + entry.event);
-            console.log("Date: " + entry.date.toDate());
-            console.log(newHistory);
-            document.getElementById("history-go-here").appendChild(newHistory);
-        })
-    })
+    firebase.auth().onAuthStateChanged(user => {
+        // Check if user is signed in:
+        if (user) {
+            //go to the correct user document by referencing to the user uid
+            currentUser = db.collection("users").doc(user.uid)
+            let historyTemplate = document.getElementById("history-content");
+            //get the document for current user.
+            currentUser.get()
+                .then(userDoc => {
+                    var userScore = userDoc.data().ecoScore;
+                    var history = userDoc.data().history;
+                    history.forEach(entry => {
+                        let newHistory = historyTemplate.content.cloneNode(true);
+                        newHistory.querySelector("#history-date").innerHTML = entry.date;
+                        newHistory.querySelector("#history-activity").innerHTML = entry.event;
+                        document.getElementById("history-go-here").prepend(newHistory);
+                    })
+                })
+        } else {
+            // No user is signed in.
+            console.log("No user is signed in");
+        }
+    });
 
 }
 
@@ -113,16 +117,16 @@ addBtn.addEventListener("click", function () {
     createParticle();
 });
 
-document.getElementById("questCardMain").addEventListener("click", function() {
+document.getElementById("questCardMain").addEventListener("click", function () {
     window.location.href = "activities.html";
 });
 
 function dailyQuestTimer() {
     var timer = document.getElementById("timer");
     var date = new Date();
-    var hour =  23 - date.getHours();
-    var minute =  59 - date.getMinutes();
-    var seconds =  59 - date.getSeconds();
+    var hour = 23 - date.getHours();
+    var minute = 59 - date.getMinutes();
+    var seconds = 59 - date.getSeconds();
     hour = ("0" + hour).slice(-2);
     minute = ("0" + minute).slice(-2);
     seconds = ("0" + seconds).slice(-2);
@@ -143,6 +147,7 @@ function checkDailyCompletion() {
             currentUser.get()
                 .then(userDoc => {
                     var daily = userDoc.data().dailyCompletion;
+                    console.log(daily);
                     if (daily) {
                         clearInterval(refreshTimer);
                         var dailyBody = document.getElementById("dailyBody");
@@ -310,7 +315,7 @@ function writeEvents() {
 // Example usage:
 // Call the function with the class name of elements you want to add stars to
 
-// displayHistoryLoop();
+displayHistoryLoop();
 displayDailyQuest();
 displayBadge();
 displayExp();
