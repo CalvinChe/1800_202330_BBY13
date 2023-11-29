@@ -31,6 +31,7 @@ var uiConfig = {
                    points: 0,
                    level: 1,
                    dailyCompletion: false,
+                   friends: [],
                    today: [],
                    history: [],
                                              //optional default profile info
