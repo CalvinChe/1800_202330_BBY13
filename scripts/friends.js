@@ -29,7 +29,7 @@ function displayFriendCardsDynamically(collection) {
                                 newcard.querySelector('.card-userTitle').innerHTML = title;
                                 newcard.querySelector('.card-description').innerHTML = description;
                                 newcard.querySelector('.card-image').src = profile;
-                                newcard.querySelector('.users-rank-badge').src = "images/Badges/Rank" + level + ".png"
+                                newcard.querySelector('.users-rank-badge').src = "images/Badges/rank" + level + ".png"
                                 // newcard.querySelector('a').href = ".html?docID="+docID;
 
                                 //Optional: give unique ids to all elements for future use

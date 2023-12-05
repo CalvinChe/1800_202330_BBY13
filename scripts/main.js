@@ -28,7 +28,7 @@ function displayBadge() {
             currentUser.get()
                 .then(userDoc => {
                     var userLevel = userDoc.data().level;
-                    let badgeImg = "images/Badges/Rank" + userLevel + ".png";
+                    let badgeImg = "images/Badges/rank" + userLevel + ".png";
                     document.getElementById("badgeImg").src = badgeImg;
                 })
         } else {
