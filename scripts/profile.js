@@ -67,7 +67,8 @@ document.getElementById("twitter-share").onclick = function () {
                     //get the data fields of the user
                     userName = userDoc.data().name;
                     text = "Hi+my+name+is+" + userName +"%2C%0D%0AJoin+me+on+my+journey+to+be+more+eco-friendly%21%0A" + "https://comp1800-bby13-2023.web.app" 
-                    location.href = "https://twitter.com/intent/tweet?text=" + text;
+                    let location = "https://twitter.com/intent/tweet?text=" + text;
+                    window.open(location).focus();
                 })
         } else {
             // No user is signed in.
