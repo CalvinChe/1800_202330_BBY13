@@ -125,7 +125,7 @@ function showMap() {
 showMap();
 
 function saveEvent() {
-    alert("SAVE POST is triggered");
+    alert("SAVE EVENT is triggered");
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             // User is signed in.
@@ -138,6 +138,8 @@ function saveEvent() {
                 duration = document.getElementById("customInputDuration").value;
             }
             let desc = document.getElementById("inputDescription").value;
+            let locationAL = document.querySelector(".mapboxgl-ctrl-geocoder--input").value;
+            let locationX = document.getElementById("inputLocationX").value;
             let contact = document.getElementById("inputContact").value;
             let attendee = document.getElementById("inputAttendee").value;
             let fee = document.getElementById("inputFee").value;
@@ -150,13 +152,15 @@ function saveEvent() {
                 duration: duration,
                 description: desc,
                 location: searchLocation,
+                locationAL: locationAL,
+                locationX: locationX,
                 contact: contact,
                 attendee: attendee,
                 fee: fee,
                 last_updated: firebase.firestore.FieldValue
                     .serverTimestamp() //current system time
             }).then(doc => {
-                console.log("1. Post document added!");
+                console.log("1. Event document added!");
                 console.log(doc.id);
                 uploadPic(doc.id);
             })
@@ -176,9 +180,9 @@ function saveEvent() {
 // This function is called AFTER the post has been created, 
 // and we know the post's document id.
 //------------------------------------------------
-function uploadPic(postDocID) {
-    console.log("inside uploadPic " + postDocID);
-    var storageRef = storage.ref("images/" + postDocID + ".jpg");
+function uploadPic(eventDocID) {
+    console.log("inside uploadPic " + eventDocID);
+    var storageRef = storage.ref("images/" + eventDocID + ".jpg");
 
     storageRef.put(ImageFile)   //global variable ImageFile
 
@@ -194,7 +198,7 @@ function uploadPic(postDocID) {
                     // Now that the image is on Storage, we can go back to the
                     // post document, and update it with an "image" field
                     // that contains the url of where the picture is stored.
-                    db.collection("events").doc(postDocID).update({
+                    db.collection("events").doc(eventDocID).update({
                         "image": url // Save the URL into users collection
                     })
                         // AFTER .update is done
@@ -203,11 +207,31 @@ function uploadPic(postDocID) {
                             // One last thing to do:
                             // save this postID into an array for the OWNER
                             // so we can show "my posts" in the future
-                            savePostIDforUser(postDocID);
+                            saveEventIDforUser(eventDocID);
                         })
                 })
         })
         .catch((error) => {
-            console.log("error uploading to cloud storage");
+            console.log("error uploading to cloud storage", error);
         })
+}
+
+//--------------------------------------------
+//saves the post ID for the user, in an array
+//--------------------------------------------
+function saveEventIDforUser(eventDocID) {
+    firebase.auth().onAuthStateChanged(user => {
+        console.log("user id is: " + user.uid);
+        console.log("eventdoc id is: " + eventDocID);
+        db.collection("users").doc(user.uid).update({
+            events: firebase.firestore.FieldValue.arrayUnion(eventDocID)
+        })
+            .then(() => {
+                console.log("5. Saved to user's document!");
+                alert("Event is complete!");
+            })
+            .catch((error) => {
+                console.error("Error writing document: ", error);
+            });
+    })
 }
