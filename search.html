@@ -26,7 +26,7 @@
    <link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
    <!-- Link to styles of your own -->
-   <link rel="stylesheet" href="./styles/style.css">
+   <link rel="stylesheet" href="./styles/events.css">
    <!-- Link to Firebase API-->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -48,74 +48,77 @@
    <Header id="headerPlaceholder"></Header>
 
    <!-- Stuff for body goes here -->
-   <div class="container d-flex">
-      <input class="form-control me-2" style="height: 3rem" type="search" placeholder="Search" aria-label="Search">
-      <div class="btn-group">
-         <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-search"></i>
-         </button>
-         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="events.html">Events</a></li>
-            <li><a class="dropdown-item" href="people.html">People</a></li>
-         </ul>
+   <div class="container">
+      <h1 class="text-center mt-4">Community Events</h1>
+
+      <div class="row">
+         <div class="col-6">
+            <div class="card ce-card text-center ms-2 mt-4">
+               <a href="eventAttending.html">
+                  <div class="card-body">
+                     <i class="card-img-top material-symbols-outlined text-success my-2">today</i>
+                     <h3 class="card-title">Attending</h3>
+                  </div>
+               </a>
+            </div>
+         </div>
+         <div class="col-6">
+            <div class="card ce-card text-center me-2 mt-4">
+               <a href="eventPast.html">
+                  <div class="card-body">
+                     <i class="card-img-top material-symbols-outlined text-success my-2">archive</i>
+                     <h3 class="card-title">Past</h3>
+                  </div>
+               </a>
+            </div>
+         </div>
+      </div>
+
+      <div class="row">
+         <div class="col-6">
+            <div class="card ce-card text-center ms-2 mt-4">
+               <a href="eventSaved.html">
+                  <div class="card-body">
+                     <i class="card-img-top material-symbols-outlined text-success my-2">bookmarks</i>
+                     <h3 class="card-title">Saved</h3>
+                  </div>
+               </a>
+            </div>
+         </div>
+         <div class="col-6">
+            <div class="card ce-card text-center me-2 mt-4">
+               <a href="eventUpcoming.html">
+                  <div class="card-body">
+                     <i class="card-img-top material-symbols-outlined text-success my-2">event_upcoming</i>
+                     <h3 class="card-title">Upcoming</h3>
+                  </div>
+               </a>
+            </div>
+         </div>
       </div>
    </div>
 
    <div class="container">
-      <div class="card p-2 mx-auto my-4">
-         <img class="card-image card-img-top" src="./images/eventPlaceholder.jpg" alt="Eco-friendly Event"
-            style="height: 12rem; object-fit:cover" />
-         <div class="card-body">
-            <h5 class="card-title">Events</h5>
-            <p class="card-text">
-               Register for your favorite events and join our community today!
-            </p>
-            <div class="btn-group">
-               <button type="button" class="btn btn-success rounded me-2" data-bs-toggle="dropdown"
-                  aria-expanded="false">
-                  <i class="bi bi-caret-right-fill"></i>
-                  Show more
-               </button>
-               <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="eventAttending.html">Attending</a></li>
-                  <li><a class="dropdown-item" href="eventPast.html">Past</a></li>
-                  <li><a class="dropdown-item" href="eventSaved.html">Saved</a></li>
-                  <li><a class="dropdown-item" href="eventUpcoming.html">Upcoming</a></li>
-               </ul>
+      <h1 class="text-center mt-4">Your events</h1>
+
+      <div class="row">
+         <div class="col-6">
+            <div class="card ce-card text-center ms-2 mt-4">
+               <div class="card-body">
+                  <i class="card-img-top material-symbols-outlined text-success my-2">group</i>
+                  <h3 class="card-title">Hosting</h3>
+               </div>
             </div>
-            <div class="btn-group">
-               <button type="button" class="btn btn-success rounded" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="bi bi-calendar-plus"></i>
-                  Your events
-               </button>
-               <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="eventCreate.html">Create an event</a></li>
-                  <li><a class="dropdown-item" href="eventHosting.html">Your events</a></li>
-               </ul>
+         </div>
+         <div class="col-6">
+            <div class="card ce-card text-center me-2 mt-4">
+               <div class="card-body">
+                  <i class="card-img-top material-symbols-outlined text-success my-2">calendar_add_on</i>
+                  <h3 class="card-title">New</h3>
+               </div>
             </div>
          </div>
       </div>
-
-      <!-- <div class="card p-2 mx-auto my-4">
-         <img class="card-image card-img-top" src="./images/personPlaceholder.jpg" alt="Portrait of a Woman"
-            style="height: 12rem; object-fit:cover" />
-         <div class="card-body">
-            <h5 class="card-title">People</h5>
-            <p class="card-text">
-               Connect with new people and invite them to your favorite event today!
-            </p>
-            <div class="btn-group">
-               <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown"
-                  aria-expanded="false">
-                  Show more ...
-               </button>
-               <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="personFriends.html">Friend</a></li>
-                  <li><a class="dropdown-item" href="personNew.html">New Connection</a></li>
-               </ul>
-            </div>
-         </div>
-      </div> -->
    </div>
 
    <!-- Navbar -->

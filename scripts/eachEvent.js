@@ -8,32 +8,46 @@ function displayEventInfo() {
     db.collection("events").doc(docID).get()
         .then(doc => {
             thisEvent = doc.data();
-            code = thisEvent.code;
-            eventName = doc.data().name;
-            // only populate title, and image
-            document.getElementById("eventName").innerHTML = eventName;
-            let imgEvent = document.querySelector(".event-img");
-            imgEvent.src = "../images/" + code + ".jpg";
 
-            hostName = doc.data().host;
-            document.getElementById("hostName").innerHTML = hostName;
-            let imgHost = document.querySelector(".host-img");
-            imgHost.src = "../images/hosts/" + hostName + ".jpg";
+            let eventTitle = thisEvent.title;
+            document.getElementById("eventTitle").innerHTML = eventTitle;
 
-            eventTime = doc.data().day + " · " + doc.data().time + " " + doc.data().timezone;
-            document.getElementById("eventTime").innerHTML = eventTime;
 
-            eventLocation = doc.data().address + " · " + doc.data().city + ", " + doc.data().province;
-            document.getElementById("eventLocation").innerHTML = eventLocation;
+            host = db.collection("users").doc(thisEvent.host).get()
+                .then(host => {
+                    thisHost = host.data();
+                    let hostImg = thisHost.profilePic;
+                    document.getElementById("hostImg").src = hostImg;
 
-            eventDetails = doc.data().details;
-            document.getElementById("eventDetails").innerHTML = eventDetails;
+                    let hostName = thisHost.name;
+                    document.getElementById("hostName").innerHTML = hostName;
+                })
 
-            eventPrice = doc.data().price;
-            document.getElementById("eventPrice").innerHTML = eventPrice;
+            let eventDate = thisEvent.date;
+            let eventTime = thisEvent.time;
+            let eventDuration = thisEvent.duration;
+            let { resultDate, resultTime } = addDurationToDateAndTime(eventDate, eventTime, eventDuration);
+            document.getElementById("eventTime").innerHTML = formatDate(eventDate) + " at " + formatTime(eventTime) + " to<br>" + formatDate(resultDate) + " at " + formatTime(resultTime);
 
-            eventRemains = doc.data().remains;
-            document.getElementById("eventRemains").innerHTML = eventRemains + " spots remain";
+            let eventLocationX = thisEvent.locationX;
+            let eventLocationAL = thisEvent.locationAL;
+            document.getElementById("eventLocationX").innerHTML = eventLocationX;
+            document.getElementById("eventLocationAL").innerHTML = formatAddress(eventLocationAL);
+            let eventImg = thisEvent.image;
+            document.getElementById("eventImg").src = eventImg;
+
+            let eventDes = thisEvent.description;
+            document.getElementById("eventDetails").innerHTML = eventDes;
+            let eventContact = thisEvent.contact;
+            document.getElementById("eventContact").innerHTML = eventContact;
+
+            let eventFee = thisEvent.fee;
+            document.getElementById("eventFee").innerHTML = "$" + eventFee;
+            let eventAttendee = thisEvent.attendee;
+            document.getElementById("eventAttendee").innerHTML = eventAttendee + " attendees";
+
+            // eventRemains = doc.data().remains;
+            // document.getElementById("eventRemains").innerHTML = eventRemains + " spots remain";
 
             let button = document.querySelector(".eventSignup");
             button.onclick = () => eventSignup();
@@ -85,3 +99,104 @@ function updateFirestore(bool) {
 
 displayEventInfo();
 
+function addDurationToDateAndTime(date, time, duration) {
+    let dateTimeString = `${date}T${time}`;
+    let startDateTime = new Date(dateTimeString);
+    let resultDateTime = new Date(startDateTime.getTime() + duration * 60 * 60 * 1000);
+
+    let resultDate = resultDateTime.toISOString().split('T')[0];
+    let resultTime = resultDateTime.toISOString().split('T')[1].slice(0, 5);
+
+    return { resultDate, resultTime };
+}
+
+function formatAddress(address) {
+    // Split the address into components
+    let parts = address.split(', ');
+
+    // Extract the street and cityProvince
+    let street = parts[0];
+    let city = parts[1];
+    let province = parts[2];
+
+    // Format the address
+    let formattedAddress = `${street} · ${city}, ${province}`;
+
+    return formattedAddress;
+}
+
+function showMap() {
+    //------------------------------------------
+    // Defines and initiates basic mapbox data
+    //------------------------------------------
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYWRhbWNoZW4zIiwiYSI6ImNsMGZyNWRtZzB2angzanBjcHVkNTQ2YncifQ.fTdfEXaQ70WoIFLZ2QaRmQ';
+    const map = new mapboxgl.Map({
+        container: 'map', // Container ID
+        style: 'mapbox://styles/mapbox/streets-v11', // Styling URL
+        center: [-122.964274, 49.236082], // Starting position
+        zoom: 8.8 // Starting zoom
+    });
+
+    // Add user controls to map (compass and zoom) to top left
+    var nav = new mapboxgl.NavigationControl();
+    map.addControl(nav, 'top-left');
+
+    // declare some globally used variables
+    var userLocationMarker;
+    var searchLocationMarker;
+    var userLocation;
+
+    // Get the user's location
+    navigator.geolocation.getCurrentPosition(function (position) {
+        userLocation = [position.coords.longitude, position.coords.latitude];
+        // console.log(userLocation);
+        // console.log(searchLocation);
+
+        // Add a marker to the map at the user's location
+        userLocationMarker = new mapboxgl.Marker()
+            .setLngLat(userLocation)
+            .addTo(map);
+
+        // Center the map on the user's location
+        map.flyTo({
+            center: userLocation
+        });
+    });
+
+    // Add the MapboxGeocoder search box to the map
+    const geocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        types: 'country,region,place,postcode,locality,neighborhood,address',
+        mapboxgl: mapboxgl
+    });
+
+    // Listen for the 'result' event from the geocoder (when a search is made)
+    db.collection("events").doc(docID).get()
+        .then(doc => {
+            searchLocation = doc.data().location;
+            // console.log(userLocation);
+            // console.log(searchLocation);
+
+            // Add a marker to the map at the search location
+            searchLocationMarker && searchLocationMarker.remove(); // Remove the previous search marker if it exists
+            searchLocationMarker = new mapboxgl.Marker({ color: 'red' })
+                .setLngLat(searchLocation)
+                .addTo(map);
+
+            // Fit the map to include both the user's location and the search location
+            const bounds = new mapboxgl.LngLatBounds();
+            bounds.extend(userLocation);
+            bounds.extend(searchLocation);
+
+            map.fitBounds(bounds, {
+                padding: {
+                    top: 100,
+                    bottom: 50,
+                    left: 100,
+                    right: 50
+                } // Add some padding so that markers aren't at the edge or blocked
+            });
+        });
+}
+
+showMap();

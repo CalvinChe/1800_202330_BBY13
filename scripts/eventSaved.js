@@ -22,41 +22,42 @@ doAll();
 function getBookmarks(user) {
     db.collection("users").doc(user.uid).get().then(userDoc => {
         // Get the Array of bookmarks
-        var bookmarks = userDoc.data().bookmarks;
+        let bookmarks = userDoc.data().bookmarks;
         // console.log(bookmarks);
 
         // Get pointer the new card template
-        let cardTemplate = document.getElementById("savedCardTemplate"); // Retrieve the HTML element with the ID "hikeCardTemplate" and store it in the cardTemplate variable. 
+        let savedCardTemplate = document.getElementById("savedCardTemplate"); // Retrieve the HTML element with the ID "hikeCardTemplate" and store it in the cardTemplate variable. 
 
         // Iterate through the ARRAY of bookmarked hikes (document ID's)
         bookmarks.forEach(thisEventID => {
             // console.log(thisEventID);
             db.collection("events").doc(thisEventID).get().then(doc => {  //iterate thru each doc
-                var code = doc.data().code;    //get unique ID to each hike to be used for fetching right image
-                var name = doc.data().name;       // get value of the "name" key
-                var time = doc.data().day + " · " + doc.data().time + " " + doc.data().timezone;
-                var rate = doc.data().rate;
-                var attend = doc.data().attendees + " attendees · " + doc.data().remains + " spots remain";
-                var details = doc.data().details;  // get value of the "details" key
-                var docID = doc.id;
-                let newcard = cardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
+                let title = doc.data().title;  // get value of the "name" key
+                let time = formatDate(doc.data().date) + " · " + formatTime(doc.data().time);
+                let image = doc.data().image;
+                // let rate = doc.data().rate;
+                let attendee = doc.data().attendee + " attendees";
+                let desc = doc.data().description;  // get value of the "details" key
+                let docID = doc.id;
+                let newcard = savedCardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
 
                 //update title and text and image
                 newcard.querySelector('.card-time').innerHTML = time;
-                newcard.querySelector('.card-title').innerHTML = name;
-                newcard.querySelector('.card-text').innerHTML = details;
-                newcard.querySelector('.card-attend').innerHTML = attend;
-                newcard.querySelector('.card-image').src = `./images/${code}.jpg`; //Example: NV01.jpg
+                newcard.querySelector('.card-title').innerHTML = title;
+                newcard.querySelector('.card-text').innerHTML = desc;
+                newcard.querySelector('.card-attend').innerHTML = attendee;
+                newcard.querySelector('.card-image').src = image; //Example: NV01.jpg
                 newcard.querySelector('a').href = "eachEvent.html?docID=" + docID;
                 newcard.querySelector('.bookmark').id = 'save-' + docID;   //guaranteed to be unique
                 newcard.querySelector('.bookmark').onclick = () => bookmark(docID);
+                // element = newcard.querySelector('.card-rating');
+                // displayRate(element, rate);
 
                 currentUser.get().then(userDoc => {
                     //get the user name
-                    var bookmarks = userDoc.data().bookmarks;
+                    let bookmarks = userDoc.data().bookmarks;
                     if (bookmarks.includes(docID)) {
-                        document.getElementById('save-' + docID).classList.remove("bi-bookmarks");
-                        document.getElementById('save-' + docID).classList.add("bi-bookmarks-fill");
+                        document.getElementById('save-' + docID).classList.replace("bi-bookmarks", "bi-bookmarks-fill");
                     }
                 })
 
@@ -66,7 +67,7 @@ function getBookmarks(user) {
                 // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
 
                 //Finally, attach this new card to the gallery
-                eventCardGroup.appendChild(newcard);
+                document.getElementById("eventCardGroup").appendChild(newcard);
             })
         })
     })
