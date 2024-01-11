@@ -1,11 +1,12 @@
-# Project Title
+# EcoQuest
 
 ## 1. Project Description
-State your app in a nutshell, or one-sentence pitch. Give some elaboration on what the core features are.  
-This browser based web application to ... 
+Our team, BBY13, has designed a web application called “EcoQuest” that gamifies eco-friendly activities. Our two major major goals with this app are:
+- To increase user awareness of eco-initiatives and their impact on the environment
+- To get users more engaged in being eco-friendly by making it fun and exciting
+
 
 ## 2. Names of Contributors
-List team members and/or short bio's here... 
 * Hi my name is Calvin. I'm excited about this project because I think this helps everyone work towards making more eco-friendly decisions.
 * Hey, I'm Thomas, and I'm excited to venture forth on this project.
 * Hi, my name is Nam Anh! I don't anything to say.
